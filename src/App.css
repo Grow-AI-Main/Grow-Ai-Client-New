@@ -1,0 +1,11 @@
+#Logo
+{
+    height: 35%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body{
+    background: linear-gradient(107.15deg, #EFAFBC 0%, #C3E3FA 100%);
+}

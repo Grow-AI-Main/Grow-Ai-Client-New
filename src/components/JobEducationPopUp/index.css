@@ -1,0 +1,15 @@
+.accept-buuton {
+    color: white;
+    background: #F48023;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.next-buuton {
+    color: white;
+    background: #c73469;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    width: 20%;
+    height: 6%;
+}
