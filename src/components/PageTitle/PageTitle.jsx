@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 import { styled } from "@mui/material/styles";
+import { titles } from "../../const/pageTitles";
 
 const TitleStyled = styled("div")`
 width: 60%;
@@ -11,15 +12,21 @@ font-weight: 700;
 font-size: 60px;
 line-height: 54px;
 text-align: center;
-color: #1682FD;
+color: #f48023;
 text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 `;
 
-const PageTitle = ({ text }) => {
+const PageTitle = ({ barStatus }) => {
+    const [title, SetTitle] = useState()
+    
+    useEffect(() => {
+        SetTitle(titles[barStatus])
+    }, [barStatus])
+
     return (
         <>
             <TitleStyled>
-                {text}
+                {title}
             </TitleStyled>
         </>
     )
