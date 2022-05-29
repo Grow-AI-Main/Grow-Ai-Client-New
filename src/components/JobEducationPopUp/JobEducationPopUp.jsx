@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Autocomplete } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { getDegreeTypes, getDegreeFields, getDegreeInstitutions, getJobTitles } from "../../services/backendService";
 import './index.css';
 
 const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, addEducation }) => {
     const [title, setTitle] = useState('');
-    const [firstFieldValue, setFirstFieldValue] = useState('');
-    const [secondFieldValue, setSecondFieldValue] = useState('');
-    const [thirdFieldValue, setThirdFieldValue] = useState('');
+    
+    const [firstFieldValue, setFirstFieldValue] = useState([]);
+    const [secondFieldValue, setSecondFieldValue] = useState([]);
+    const [thirdFieldValue, setThirdFieldValue] = useState([]);
+
+    const [selectedFirstFieldValue, setSelectedFirstFieldValue] = useState('');
+    const [selectedSecondFieldValue, setSelectedSecondFieldValue] = useState('');
+    const [selectedThirdFieldValue, setSelectedThirdFieldValue] = useState('');
+
     const [startYear, setStartYear] = useState(new Date());
     const [endYear, setEndYear] = useState(new Date());
 
@@ -20,16 +27,39 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
     const [fiveFieldTitle, setFiveFieldTitle] = useState('');
     const [acceptText, setAcceptText] = useState('');
 
-
     useEffect(() => {
+        const degreeTypes = async () => {
+            const data = await getDegreeTypes();
+            setFirstFieldValue(data);
+        }
+
+        const degreeFields = async () => {
+            const data = await getDegreeFields();
+            setSecondFieldValue(data);
+        }
+
+        const degreeInstitutions = async () => {
+            const data = await getDegreeInstitutions();
+            setThirdFieldValue(data);
+        }
+
+        const jobTitle = async () => {
+            const data = await getJobTitles();
+            setFirstFieldValue(data);
+        }
+
+
         if (barStatus === 1) {
-            setFirstFieldTitle('Degree level');
-            setSecondFieldTitle('Degree field');
-            setThirdFieldTitle('instutation');
+            setFirstFieldTitle('Degree field');
+            setSecondFieldTitle('Degree type');
+            setThirdFieldTitle('Instutation Name');
             setFourFieldTitle('Start Year');
             setFiveFieldTitle('Graduation Year');
             setTitle('Education Information');
             setAcceptText("I've inserted my education");
+            degreeFields();
+            degreeTypes();
+            degreeInstitutions();
         }
         else if (barStatus === 2) {
             setFirstFieldTitle('Job Title');
@@ -39,6 +69,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             setFiveFieldTitle('End Year & Month');
             setTitle('Expirience Information');
             setAcceptText("I've inserted all my education history");
+            jobTitle();
         }
     }, [barStatus])
 
@@ -51,13 +82,13 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
         handleClose();
 
         let newItem = {}
-        newItem[firstFieldTitle] = firstFieldValue;
-        newItem[secondFieldTitle] = secondFieldValue;
+        newItem[firstFieldTitle] = selectedFirstFieldValue;
+        newItem[secondFieldTitle] = selectedSecondFieldValue;
         newItem[fourFieldTitle] = startYear;
         newItem[fiveFieldTitle] = endYear;
 
         if (barStatus === 1) {
-            newItem[thirdFieldTitle] = thirdFieldValue;
+            newItem[thirdFieldTitle] = selectedThirdFieldValue;
             addEducation(newItem);
         }
         else if (barStatus === 2) {
@@ -70,41 +101,52 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             <Dialog open={openPopUp} onClose={handleClose}>
                 <DialogTitle>{title}</DialogTitle>
                 <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        label={firstFieldTitle}
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={firstFieldValue}
-                        onChange={(e) => {
-                            setFirstFieldValue(e.target.value);
+                    <Autocomplete
+                        disablePortal
+                        id="combo-box-demo"
+                        options={firstFieldValue}
+                        sx={{ width: 300 }}
+                        renderInput={(params) => <TextField {...params} label={firstFieldTitle} />}
+                        onChange={(event, newValue) => {
+                            setSelectedFirstFieldValue(newValue);
                         }}
                     />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        label={secondFieldTitle}
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={secondFieldValue}
-                        onChange={(e) => {
-                            setSecondFieldValue(e.target.value);
-                        }}
-                    />
-                    {thirdFieldTitle &&
+                    {!thirdFieldTitle &&
                         <TextField
                             autoFocus
                             margin="dense"
-                            label={thirdFieldTitle}
+                            label={secondFieldTitle}
                             type="text"
                             fullWidth
                             variant="standard"
-                            value={thirdFieldValue}
+                            value={selectedSecondFieldValue}
                             onChange={(e) => {
-                                setThirdFieldValue(e.target.value);
+                                setSelectedSecondFieldValue(e.target.value);
+                            }}
+                        />
+                    }
+                    {
+                        thirdFieldTitle &&
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={secondFieldValue}
+                            sx={{ width: 300 }}
+                            renderInput={(params) => <TextField {...params} label={secondFieldTitle} />}
+                            onChange={(event, newValue) => {
+                                setSelectedSecondFieldValue(newValue);
+                            }}
+                        />
+                    }
+                    {thirdFieldTitle &&
+                        <Autocomplete
+                            disablePortal
+                            id="combo-box-demo"
+                            options={thirdFieldValue}
+                            sx={{ width: 300 }}
+                            renderInput={(params) => <TextField {...params} label={thirdFieldTitle} />}
+                            onChange={(event, newValue) => {
+                                setSelectedThirdFieldValue(newValue);
                             }}
                         />
                     }
