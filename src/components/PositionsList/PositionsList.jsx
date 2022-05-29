@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Position from "../Position/Position";
 import { styled } from "@mui/material/styles";
+import { getDestinationJobs } from "../../services/backendService";
 
 
 const PositionListStyled = styled("div")`
@@ -11,8 +12,19 @@ margin-top: 5%;
 background-color: transparent;
 `;
 
-const PositionList = ({ positions, setCurrentPosition, setNextStep }) => {
+const PositionList = ({setCurrentPosition, setNextStep }) => {
     const [isPositionsEnable, setIsPositionsEnable] = useState(true);
+    const [positions, setPositions] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getDestinationJobs();
+            setPositions(data);
+          }
+          fetchData();
+    },[])
+
+
     return (
         <>
             {isPositionsEnable &&
