@@ -5,7 +5,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import './index.css';
 
-const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp }) => {
+const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, addEducation }) => {
     const [title, setTitle] = useState('');
     const [firstFieldValue, setFirstFieldValue] = useState('');
     const [secondFieldValue, setSecondFieldValue] = useState('');
@@ -28,7 +28,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp }) => {
             setThirdFieldTitle('instutation');
             setFourFieldTitle('Start Year');
             setFiveFieldTitle('Graduation Year');
-            setTitle('Collage Level Education');
+            setTitle('Education Information');
             setAcceptText("I've inserted my education");
         }
         else if (barStatus === 2) {
@@ -37,7 +37,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp }) => {
             setThirdFieldTitle('');
             setFourFieldTitle('Start Year & Month');
             setFiveFieldTitle('End Year & Month');
-            setTitle('Collage Level Education');
+            setTitle('Expirience Information');
             setAcceptText("I've inserted all my education history");
         }
     }, [barStatus])
@@ -45,6 +45,24 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp }) => {
 
     const handleClose = () => {
         setOpenPopUp(false);
+    }
+
+    const addNewItem = () => {
+        handleClose();
+
+        let newItem = {}
+        newItem[firstFieldTitle] = firstFieldValue;
+        newItem[secondFieldTitle] = secondFieldValue;
+        newItem[fourFieldTitle] = startYear;
+        newItem[fiveFieldTitle] = endYear;
+
+        if (barStatus === 1) {
+            newItem[thirdFieldTitle] = thirdFieldValue;
+            addEducation(newItem);
+        }
+        else if (barStatus === 2) {
+            addExpirience(newItem);
+        }
     };
 
     return (
@@ -94,7 +112,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp }) => {
                 <DialogContent>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
-                            views={ barStatus === 2 ? ['year','month'] : ['year'] }
+                            views={barStatus === 2 ? ['year', 'month'] : ['year']}
                             label={fourFieldTitle}
                             value={startYear}
                             onChange={(newValue) => {
@@ -103,7 +121,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp }) => {
                             renderInput={(params) => <TextField {...params} />}
                         />
                         <DatePicker
-                            views={ barStatus === 2 ? ['year','month'] : ['year']}
+                            views={barStatus === 2 ? ['year', 'month'] : ['year']}
                             label={fiveFieldTitle}
                             value={endYear}
                             onChange={(newValue) => {
@@ -114,7 +132,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp }) => {
                     </LocalizationProvider>
                 </DialogContent>
                 <DialogActions>
-                    <Button className="accept-buuton" onClick={handleClose}>{acceptText}</Button>
+                    <Button className="accept-buuton" onClick={addNewItem}>{acceptText}</Button>
                 </DialogActions>
             </Dialog>
         </>
