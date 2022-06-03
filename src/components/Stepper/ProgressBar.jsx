@@ -10,6 +10,8 @@ import Filter4OutlinedIcon from '@mui/icons-material/Filter4Outlined';
 import StepConnector, {
     stepConnectorClasses
 } from "@mui/material/StepConnector";
+import './index.css';
+
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -18,13 +20,13 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.active}`]: {
         [`& .${stepConnectorClasses.line}`]: {
             backgroundImage:
-                "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)"
+                "linear-gradient( 136deg, rgb(228 189 204) 0%, rgb(197 53 106) 50%, rgb(197 53 106) 100%)"
         }
     },
     [`&.${stepConnectorClasses.completed}`]: {
         [`& .${stepConnectorClasses.line}`]: {
             backgroundImage:
-                "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)"
+                "linear-gradient( 136deg, rgb(228 189 204) 0%, rgb(197 53 106) 50%, rgb(197 53 106) 100%)"
         }
     },
     [`& .${stepConnectorClasses.line}`]: {
@@ -49,12 +51,12 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
     alignItems: "center",
     ...(ownerState.active && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+            "linear-gradient( 136deg, rgb(228 189 204) 0%, rgb(22 130 253) 50%, rgb(22 130 253) 100%)",
         boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)"
     }),
     ...(ownerState.completed && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)"
+            "linear-gradient( 136deg, rgb(228 189 204) 0%, rgb(22 130 253) 50%, rgb(22 130 253) 100%)"
     })
 }));
 
@@ -85,15 +87,17 @@ const steps = [
     "What's your next step ?"
 ];
 
-const ProgressBar = ({barStatus}) => {
+const ProgressBar = ({ barStatus }) => {
     return (
-        <Stepper alternativeLabel activeStep={barStatus} connector={<ColorlibConnector />}>
-            {steps.map((label) => (
-                <Step key={label}>
-                    <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-                </Step>
-            ))}
-        </Stepper>
+        <div className="stepper-div">
+            <Stepper alternativeLabel activeStep={barStatus} connector={<ColorlibConnector />}>
+                {steps.map((label) => (
+                    <Step key={label}>
+                        <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                    </Step>
+                ))}
+            </Stepper>
+        </div>
     );
 };
 

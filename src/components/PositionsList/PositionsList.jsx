@@ -12,7 +12,7 @@ margin-top: 5%;
 background-color: transparent;
 `;
 
-const PositionList = ({setCurrentPosition, setNextStep }) => {
+const PositionList = ({ barStatus, setCurrentPosition, setNextStep }) => {
     const [isPositionsEnable, setIsPositionsEnable] = useState(true);
     const [positions, setPositions] = useState([]);
 
@@ -20,9 +20,16 @@ const PositionList = ({setCurrentPosition, setNextStep }) => {
         const fetchData = async () => {
             const data = await getDestinationJobs();
             setPositions(data);
-          }
-          fetchData();
-    },[])
+        }
+        fetchData();
+
+        if (barStatus === 0) {
+            setIsPositionsEnable(true);
+        }
+        else {
+            setIsPositionsEnable(false);
+        }
+    }, [barStatus])
 
 
     return (
@@ -33,7 +40,7 @@ const PositionList = ({setCurrentPosition, setNextStep }) => {
                         {
                             positions.map((item, index) => (
                                 <Grid item spacing={3} key={index}>
-                                    <Position setCurrentPosition={setCurrentPosition} text={item} setNextStep={setNextStep} setIsPositionsEnable={setIsPositionsEnable} />
+                                    <Position setCurrentPosition={setCurrentPosition} text={item} setNextStep={setNextStep}/>
                                 </Grid>
                             ))
                         }

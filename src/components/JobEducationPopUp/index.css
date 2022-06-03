@@ -3,13 +3,46 @@
     background: #F48023;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
+    width: 230px;
+    height: 45px;
+    margin-top: 20px;
+}
+
+.popup-buuton {
+    color: white;
+    background: #F48023;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    width: 185px;
+    height: 45px;
+    margin-top: 45px;
 }
 
 .next-buuton {
     color: white;
-    background: #c73469;
+    background: #1682FD;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
-    width: 20%;
-    height: 6%;
+    width: 185px;
+    height: 45px;
+    margin-top: 15px;
+}
+
+.prev-buuton {
+    color: white;
+    background:  #c5356a;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    width: 185px;
+    height: 45px;
+    margin-top: 15px;
+    margin-right: 50px;
+}
+
+.text-fields{
+    margin-top: 15px;
+}
+
+.date-fields{
+    margin-right: 40px;
 }
