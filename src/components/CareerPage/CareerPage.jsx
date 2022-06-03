@@ -10,6 +10,7 @@ import StepConnector, {
     stepConnectorClasses
 } from "@mui/material/StepConnector";
 import './index.css';
+import JsonData from '../../const/responseExample.json'
 
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -144,7 +145,7 @@ const jobSteps = [
     "What's your next step ?",
     "What's your next step ?",
     "What's your next step ?",
-    "What's your next step ?",
+    
 
 ];
 
@@ -153,17 +154,24 @@ const educationSteps = [
     "What have you done do far ?",
 ];
 
-const CareerPage = ({ barStatus }) => {
+const CareerPage = ({ barStatus, experienceHistory, educationHistory}) => {
     const [isEnable, setIsEnable] = useState(false);
+    const [accomplishedJobNum, setAccomplishedJobNum] = useState(0);
+    const [accomplishedJob, setAccomplishedJob] = useState([{}]);
 
     useEffect(() => {
         if (barStatus === 3) {
             setIsEnable(true);
+            setAccomplishedJobNum(experienceHistory.length - 1);
+            const exp = JsonData.experiences;
+            const jobs = experienceHistory.concat(exp)
+            setAccomplishedJob(jobs)
         }
         else {
             setIsEnable(false);
         }
-    }, [barStatus])
+    }, [barStatus, experienceHistory])
+
 
     return (
         <>
@@ -177,10 +185,10 @@ const CareerPage = ({ barStatus }) => {
                         </Stepper>
                     </div>
                     <div className="recomended-div">
-                        <Stepper alternativeLabel activeStep={3} connector={<ColorlibConnector />}>
-                            {jobSteps.map((label) => (
-                                <Step key={label}>
-                                    <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                        <Stepper alternativeLabel activeStep={accomplishedJobNum} connector={<ColorlibConnector />}>
+                            {accomplishedJob.map((label,index) => (
+                                <Step key={label['Job Title']}>
+                                    <StepLabel StepIconComponent={ColorlibStepIcon}>{label['Job Title']}<br/>{label['duration']?"duration: "+ label['duration']:""}</StepLabel>
                                 </Step>
                             ))}
                         </Stepper>

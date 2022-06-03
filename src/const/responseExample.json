@@ -1,0 +1,54 @@
+{
+    "experiences": [
+        {
+            "duration": 29,
+            "Job Title": "software engineer"
+        },
+        {
+            "duration": 21,
+            "Job Title": "software engineer"
+        },
+        {
+            "duration": 20,
+            "Job Title": "software engineer"
+        },
+        {
+            "duration": 27,
+            "Job Title": "software engineer"
+        },
+        {
+            "duration": 18,
+            "Job Title": "software engineer"
+        },
+        {
+            "duration": 18,
+            "Job Title": "software engineer"
+        },
+        {
+            "duration": 26,
+            "Job Title": "software engineer"
+        },
+        {
+            "duration": 26,
+            "Job Title": "software engineering manager"
+        }
+    ],
+    "firstDegree": {
+        "field": "computer science",
+        "institutionName": [
+            "Ben-Gurion University of the Negev",
+            "Technion - Israel Institute of Technology",
+            "The Academic College of Tel-Aviv, Yaffo"
+        ],
+        "type": "B.Sc."
+    },
+    "secondDegree": {
+        "field": "economics",
+        "institutionName": [
+            "university haifa",
+            "Tel Aviv University",
+            "Weizmann Institute of Science"
+        ],
+        "type": "M.Sc."
+    }
+}
