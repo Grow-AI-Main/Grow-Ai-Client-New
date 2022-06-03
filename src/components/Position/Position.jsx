@@ -9,13 +9,12 @@ background: rgba(255, 255, 255, 0.8);
 border-radius: 100px;
 `;
 
-const Position = ({ text, setCurrentPosition,setNextStep,setIsPositionsEnable }) => {
+const Position = ({ text, setCurrentPosition,setNextStep }) => {
     return (
         <>
             <PositionStyled onClick={(e) => {
                 setCurrentPosition(e.target.value);
                 setNextStep();
-                setIsPositionsEnable(false);
             }}>
                 {text}
             </PositionStyled>

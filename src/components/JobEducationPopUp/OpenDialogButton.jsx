@@ -4,8 +4,7 @@ import { styled } from "@mui/material/styles";
 import '../JobEducationPopUp/index.css';
 
 const OpenDialogButtonStyled = styled("div")`
-margin-top: 3%;
-text-align: center;
+    text-align: center;
 `;
 
 const OpenDialogButton = ({ setOpenPopUp, barStatus }) => {
@@ -28,7 +27,7 @@ const OpenDialogButton = ({ setOpenPopUp, barStatus }) => {
         <>
             {isEnable &&
                 <OpenDialogButtonStyled>
-                    <Button onClick={handleClickOpen} className="accept-buuton">{barStatus === 1 ? "Add Education" : "Add Expeirience"}</Button>
+                    <Button onClick={handleClickOpen} className="popup-buuton">{barStatus === 1 ? "Add Education" : "Add Expeirience"}</Button>
                 </OpenDialogButtonStyled>
             }
         </>)

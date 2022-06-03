@@ -4,11 +4,11 @@ import { styled } from "@mui/material/styles";
 import '../JobEducationPopUp/index.css';
 
 const OpenDialogButtonStyled = styled("div")`
-margin-top: 3%;
 text-align: center;
+border-spacing: 10px;
 `;
 
-const NextStageButton = ({ barStatus, setNextStep }) => {
+const NextStageButton = ({ barStatus, setNextStep, setPrevStep }) => {
 
     const [isEnable, setIsEnable] = useState(false);
 
@@ -16,16 +16,24 @@ const NextStageButton = ({ barStatus, setNextStep }) => {
         if (barStatus !== 0) {
             setIsEnable(true);
         }
+        else{
+            setIsEnable(false);
+        }
     }, [barStatus])
 
-    const handleClickOpen = () => {
+    const setNextStage = () => {
         setNextStep();
+    };
+
+    const setPrevStage = () => {
+        setPrevStep();
     };
 
     return (
         <>{isEnable &&
             <OpenDialogButtonStyled>
-                <Button onClick={handleClickOpen} className="next-buuton">Next Stage !</Button>
+                <Button onClick={setPrevStage} className="prev-buuton">Back Stage</Button>
+                <Button onClick={setNextStage} className="next-buuton">Next Stage !</Button>
             </OpenDialogButtonStyled>
         }
         </>)

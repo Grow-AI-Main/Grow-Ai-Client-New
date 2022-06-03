@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { StyledEngineProvider } from '@mui/material/styles';
 import ProgressBar from './components/Stepper/ProgressBar';
 import PageTitle from './components/PageTitle/PageTitle';
@@ -7,6 +7,8 @@ import OpenDialogButton from './components/OpenDialogButton/OpenDialogButton';
 import JobEducationPopUp from './components/JobEducationPopUp/JobEducationPopUp';
 import NextStageButton from './components/NextStageButton/NextStageButton';
 import EducationJobList from './components/EducationJobList/EducationJobList';
+import CareerPage from './components/CareerPage/CareerPage';
+import BackgroundImage from '../src/BackgroundImagePath.png';
 import './App.css';
 
 const App = () => {
@@ -20,26 +22,29 @@ const App = () => {
         setBarStatus(barStatus + 1);
     };
 
+    const setPrevStep = () => {
+        setBarStatus(barStatus - 1);
+    };
+
     const addExpirience = (newExpirience) => {
-        setExpirienceHistory([...expirienceHistory,newExpirience]);
+        setExpirienceHistory([...expirienceHistory, newExpirience]);
     };
 
     const addEducation = (newEducation) => {
-        setEducationHistory([...educationHistory,newEducation]);
+        setEducationHistory([...educationHistory, newEducation]);
     };
 
     return (
         <>
             <StyledEngineProvider injectFirst>
-                <ProgressBar barStatus={barStatus}  />
+                <ProgressBar barStatus={barStatus} />
                 <PageTitle barStatus={barStatus} text={"What do you want to be when you grow up?"} />
-                <PositionList setCurrentPosition={setCurrentPosition} setNextStep={setNextStep} />
-                <EducationJobList educationHistory ={educationHistory} expirienceHistory={expirienceHistory} barStatus ={barStatus} />
-                <JobEducationPopUp barStatus = {barStatus} setOpenPopUp={setOpenPopUp} openPopUp={openPopUp} addExpirience={addExpirience} addEducation={addEducation} />
+                <PositionList barStatus={barStatus} setCurrentPosition={setCurrentPosition} setNextStep={setNextStep} />
+                <EducationJobList educationHistory={educationHistory} expirienceHistory={expirienceHistory} barStatus={barStatus} />
+                <JobEducationPopUp barStatus={barStatus} setOpenPopUp={setOpenPopUp} openPopUp={openPopUp} addExpirience={addExpirience} addEducation={addEducation} />
                 <OpenDialogButton buttonText={"Add Education"} setOpenPopUp={setOpenPopUp} barStatus={barStatus} />
-                <NextStageButton barStatus = {barStatus} setNextStep={setNextStep} />
+                <NextStageButton barStatus={barStatus} setNextStep={setNextStep} setPrevStep={setPrevStep} />
             </StyledEngineProvider>
-
         </>
     );
 }
