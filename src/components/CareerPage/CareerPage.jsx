@@ -154,23 +154,37 @@ const educationSteps = [
     "What have you done do far ?",
 ];
 
-const CareerPage = ({ barStatus, experienceHistory, educationHistory}) => {
+const CareerPage = ({ barStatus, experienceHistory, educationHistory, }) => {
     const [isEnable, setIsEnable] = useState(false);
     const [accomplishedJobNum, setAccomplishedJobNum] = useState(0);
-    const [accomplishedJob, setAccomplishedJob] = useState([{}]);
+    const [pastEducation, setPastEducation] = useState([]);
+    const [pastEducationNum, setPastEducationNum] = useState(0);
+    const [accomplishedJob, setAccomplishedJob] = useState([]);
+    
 
     useEffect(() => {
         if (barStatus === 3) {
             setIsEnable(true);
             setAccomplishedJobNum(experienceHistory.length - 1);
+            setEducation()
             const exp = JsonData.experiences;
-            const jobs = experienceHistory.concat(exp)
-            setAccomplishedJob(jobs)
+            const jobs = experienceHistory.concat(exp);
+            setAccomplishedJob(jobs);
+            setPastEducationNum(educationHistory.length -1);
+            
         }
         else {
             setIsEnable(false);
         }
-    }, [barStatus, experienceHistory])
+    }, [barStatus, experienceHistory,educationHistory])
+
+    const setEducation = () => {
+            const fd = JsonData.firstDegree
+            const sd = JsonData.secondDegree
+            const edu = educationHistory
+            const education = edu.concat(fd,sd)
+            setPastEducation(education)
+    }
 
 
     return (
@@ -187,7 +201,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory}) => {
                     <div className="recomended-div">
                         <Stepper alternativeLabel activeStep={accomplishedJobNum} connector={<ColorlibConnector />}>
                             {accomplishedJob.map((label,index) => (
-                                <Step key={label['Job Title']}>
+                                <Step key={label['Job Title']+index}>
                                     <StepLabel StepIconComponent={ColorlibStepIcon}>{label['Job Title']}<br/>{label['duration']?"duration: "+ label['duration']:""}</StepLabel>
                                 </Step>
                             ))}
@@ -201,10 +215,10 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory}) => {
                         </Stepper>
                     </div>
                     <div className="recomended-div">
-                        <Stepper alternativeLabel activeStep={3} connector={<ColorlibConnector />}>
-                            {educationSteps.map((label) => (
-                                <Step key={label}>
-                                    <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                        <Stepper alternativeLabel activeStep={pastEducationNum} connector={<ColorlibConnector />}>
+                            {pastEducation.map((label,index) => (
+                                <Step key={label['Degree field']}>
+                                    <StepLabel StepIconComponent={ColorlibStepIcon}>{<><>{label['Degree type']+" "+label['Degree field']}</><>{index>pastEducationNum?<><br/><ul>{label['institutionName'].map((inst)=>(<li>{inst}</li>))}</ul></>:<></>}</></>}</StepLabel>
                                 </Step>
                             ))}
                         </Stepper>
@@ -215,3 +229,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory}) => {
 };
 
 export default CareerPage;
+
+
+//<br/><ul>{label['institutionName'].map((inst)=>(<li>{inst}</li>))}</ul>
+//<>{label['field']+ " " + label['type']}</>
