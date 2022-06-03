@@ -10,15 +10,24 @@ border-spacing: 10px;
 
 const NextStageButton = ({ barStatus, setNextStep, setPrevStep }) => {
 
-    const [isEnable, setIsEnable] = useState(false);
+    const [isNextEnable, setIsNextEnable] = useState(false);
+    const [isPrevEnable, setIsPrevEnable] = useState(false);
 
     useEffect(() => {
         if (barStatus !== 0) {
-            setIsEnable(true);
+            if (barStatus < 3) {
+                setIsNextEnable(true);
+            }
+            else {
+                setIsNextEnable(false);
+            }
+            setIsPrevEnable(true);
         }
-        else{
-            setIsEnable(false);
+        else {
+            setIsNextEnable(false);
+            setIsPrevEnable(false);
         }
+
     }, [barStatus])
 
     const setNextStage = () => {
@@ -30,12 +39,15 @@ const NextStageButton = ({ barStatus, setNextStep, setPrevStep }) => {
     };
 
     return (
-        <>{isEnable &&
+        <>
             <OpenDialogButtonStyled>
-                <Button onClick={setPrevStage} className="prev-buuton">Back Stage</Button>
-                <Button onClick={setNextStage} className="next-buuton">Next Stage !</Button>
+                {isPrevEnable &&
+                    <Button onClick={setPrevStage} className="prev-buuton">Back Stage</Button>
+                }
+                {isNextEnable &&
+                    <Button onClick={setNextStage} className="next-buuton">Next Stage !</Button>
+                }
             </OpenDialogButtonStyled>
-        }
         </>)
 
 };
