@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create(
     {
-            baseURL: "http://localhost:8080",
+            baseURL: "http://35.158.93.72:8080",
             withCredentials: false,
             headers: {
               'Access-Control-Allow-Origin' : '*',
