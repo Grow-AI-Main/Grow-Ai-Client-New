@@ -5,12 +5,16 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import BusinessIcon from '@mui/icons-material/Business';
 import SchoolIcon from '@mui/icons-material/School';
+import WorkHistoryRoundedIcon from '@mui/icons-material/WorkHistoryRounded';
+import HistoryEduRoundedIcon from '@mui/icons-material/HistoryEduRounded';
+import AssignmentTurnedInRoundedIcon from '@mui/icons-material/AssignmentTurnedInRounded';
+import BookmarkAddedRoundedIcon from '@mui/icons-material/BookmarkAddedRounded';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import StepConnector, {
     stepConnectorClasses
 } from "@mui/material/StepConnector";
 import './index.css';
-import JsonData from '../../const/responseExample.json'
+import JsonData from '../../const/responseExample.json';
 
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -49,6 +53,7 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
     borderRadius: "20%",
     justifyContent: "center",
     alignItems: "center",
+    textAlign:'left',
     ...(ownerState.active && {
         backgroundImage:
             "linear-gradient( 136deg, rgb(255 133 43) 0%, #f48023 50%, rgb(22 130 253 / 65%) 100%);",
@@ -56,7 +61,7 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
     }),
     ...(ownerState.completed && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(255 133 43) 0%, #f48023 50%, rgb(22 130 253 / 65%) 100%);"
+            "linear-gradient( 136deg, rgb(255 133 43) 50%, #f48023 50%, rgb(22 130 253 / 65%) 100%);"
     })
 }));
 
@@ -117,18 +122,35 @@ const MainEducationIcon = (props) => {
     );
 };
 
-const ColorlibStepIcon = (props) => {
+const ColorlibJobStepIcon = (props) => {
     const { active, completed, className } = props;
 
     const icons = {
     };
+
+
 
     return (
         <ColorlibStepIconRoot
             ownerState={{ completed, active }}
             className={className}
         >
-            {icons[String(props.icon)]}
+           {(active||completed) ? <AssignmentTurnedInRoundedIcon/> : <WorkHistoryRoundedIcon/> } 
+        </ColorlibStepIconRoot>
+    );
+};
+
+const ColorlibEducationStepIcon = (props) => {
+    const { active, completed, className } = props;
+    let icon
+    const icons = {
+    };
+    return (
+        <ColorlibStepIconRoot
+            ownerState={{ completed, active }}
+            className={className}
+        >
+            {(active||completed) ? <BookmarkAddedRoundedIcon/> : <HistoryEduRoundedIcon/> }
         </ColorlibStepIconRoot>
     );
 };
@@ -154,12 +176,13 @@ const educationSteps = [
     "What have you done do far ?",
 ];
 
-const CareerPage = ({ barStatus, experienceHistory, educationHistory, }) => {
+const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob }) => {
     const [isEnable, setIsEnable] = useState(false);
     const [accomplishedJobNum, setAccomplishedJobNum] = useState(0);
     const [pastEducation, setPastEducation] = useState([]);
     const [pastEducationNum, setPastEducationNum] = useState(0);
     const [accomplishedJob, setAccomplishedJob] = useState([]);
+    const [dreamJob, setDreamJob] = useState('');
     
 
     useEffect(() => {
@@ -171,12 +194,14 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, }) => {
             const jobs = experienceHistory.concat(exp);
             setAccomplishedJob(jobs);
             setPastEducationNum(educationHistory.length -1);
+            const dream = targetJob;
+            setDreamJob(dream);
             
         }
         else {
             setIsEnable(false);
         }
-    }, [barStatus, experienceHistory,educationHistory])
+    }, [barStatus, experienceHistory,educationHistory, targetJob])
 
     const setEducation = () => {
             const fd = JsonData.firstDegree
@@ -202,9 +227,12 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, }) => {
                         <Stepper alternativeLabel activeStep={accomplishedJobNum} connector={<ColorlibConnector />}>
                             {accomplishedJob.map((label,index) => (
                                 <Step key={label['Job Title']+index}>
-                                    <StepLabel StepIconComponent={ColorlibStepIcon}>{label['Job Title']}<br/>{label['duration']?"duration: "+ label['duration']:""}</StepLabel>
+                                    <StepLabel StepIconComponent={ColorlibJobStepIcon}>{label['Job Title']}<br/>{label['duration']?"For: "+ label['duration'] +" months": label ['Company Name']}</StepLabel>
                                 </Step>
                             ))}
+                            <Step completed={true}>
+                                <StepLabel StepIconComponent={ColorlibJobStepIcon}>{dreamJob}</StepLabel>
+                            </Step>
                         </Stepper>
                     </div>
                     <div className="stepper-main-div">
@@ -218,9 +246,12 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, }) => {
                         <Stepper alternativeLabel activeStep={pastEducationNum} connector={<ColorlibConnector />}>
                             {pastEducation.map((label,index) => (
                                 <Step key={label['Degree field']}>
-                                    <StepLabel StepIconComponent={ColorlibStepIcon}>{<><>{label['Degree type']+" "+label['Degree field']}</><>{index>pastEducationNum?<><br/><ul>{label['institutionName'].map((inst)=>(<li>{inst}</li>))}</ul></>:<></>}</></>}</StepLabel>
+                                    <StepLabel StepIconComponent={ColorlibEducationStepIcon}>{<><>{label['Degree type']+" "+label['Degree field']}</><>{index>pastEducationNum?<><br/><ul>{label['institutionName'].map((inst)=>(<li>{inst}</li>))}</ul></>:<><br/>{label['Instutation Name']}</>}</></>}</StepLabel>
                                 </Step>
                             ))}
+                            <Step completed={true}>
+                                <StepLabel StepIconComponent={ColorlibEducationStepIcon}>Done!</StepLabel>
+                            </Step>
                         </Stepper>
                     </div>
                 </>

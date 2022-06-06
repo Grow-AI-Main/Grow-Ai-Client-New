@@ -42,7 +42,7 @@ const App = () => {
                 <PositionList barStatus={barStatus} setCurrentPosition={setCurrentPosition} setNextStep={setNextStep} />
                 <EducationJobList educationHistory={educationHistory} expirienceHistory={expirienceHistory} barStatus={barStatus} />
                 <JobEducationPopUp barStatus={barStatus} setOpenPopUp={setOpenPopUp} openPopUp={openPopUp} addExpirience={addExpirience} addEducation={addEducation} />
-                <CareerPage barStatus={barStatus} experienceHistory={expirienceHistory} educationHistory={educationHistory} />
+                <CareerPage barStatus={barStatus} experienceHistory={expirienceHistory} educationHistory={educationHistory} targetJob={currentPosition} />
                 <OpenDialogButton buttonText={"Add Education"} setOpenPopUp={setOpenPopUp} barStatus={barStatus} />
                 <NextStageButton barStatus={barStatus} setNextStep={setNextStep} setPrevStep={setPrevStep} />
             </StyledEngineProvider>

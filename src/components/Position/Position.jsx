@@ -13,7 +13,7 @@ const Position = ({ text, setCurrentPosition,setNextStep }) => {
     return (
         <>
             <PositionStyled onClick={(e) => {
-                setCurrentPosition(e.target.value);
+                setCurrentPosition(text);
                 setNextStep();
             }}>
                 {text}

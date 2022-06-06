@@ -34,21 +34,21 @@
         }
     ],
     "firstDegree": {
-        "field": "computer science",
+        "Degree field": "computer science",
         "institutionName": [
             "Ben-Gurion University of the Negev",
             "Technion - Israel Institute of Technology",
             "The Academic College of Tel-Aviv, Yaffo"
         ],
-        "type": "B.Sc."
+        "Degree type": "B.Sc."
     },
     "secondDegree": {
-        "field": "economics",
+        "Degree field": "economics",
         "institutionName": [
             "university haifa",
             "Tel Aviv University",
             "Weizmann Institute of Science"
         ],
-        "type": "M.Sc."
+        "Degree type": "M.Sc."
     }
 }
