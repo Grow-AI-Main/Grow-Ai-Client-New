@@ -82,9 +82,9 @@ const ColorlibStepIcon = (props) => {
 
 const steps = [
     "What's your dream job ?",
-    "What have you done do far ?",
-    "What's your tailor-made career path ?",
-    "What's your next step ?"
+    "What have you study so far ?",
+    "What have you done so far ?",
+    "What's your tailor-made career path ?"
 ];
 
 const ProgressBar = ({ barStatus }) => {

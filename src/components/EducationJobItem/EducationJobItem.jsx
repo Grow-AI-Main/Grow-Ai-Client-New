@@ -1,5 +1,7 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
+import DeleteIcon from '@mui/icons-material/Delete';
+import './index.css'
 
 const ItemDataGridStyled = styled("div")`
 height: 12%;
@@ -25,8 +27,18 @@ margin-left: 3%;
 color:Gray;
 `;
 
+const DeleteIconStyled = styled(DeleteIcon)(({ }) => ({
+    marginLeft: '471%',
+    marginTop: '-16%',
+}));
 
-const EducationJobItem = ({ firstTitle, secondTitle, firstTitleValue, secondTitleValue }) => {
+
+const EducationJobItem = ({ index, firstTitle, secondTitle, firstTitleValue, secondTitleValue, removeEducationOrJob }) => {
+
+    const onTrashClick = () => {
+        removeEducationOrJob(index);
+    };
+
     return (
         <>
             <ItemDataGridStyled>
@@ -44,6 +56,7 @@ const EducationJobItem = ({ firstTitle, secondTitle, firstTitleValue, secondTitl
                     </ItemDataTitleStyled>
                     <ItemDataValueStyled>
                         {secondTitleValue}
+                        <DeleteIconStyled onClick={onTrashClick} />
                     </ItemDataValueStyled>
                 </ItemDataStyled>
             </ItemDataGridStyled>

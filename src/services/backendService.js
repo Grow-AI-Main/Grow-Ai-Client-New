@@ -50,6 +50,7 @@ const getDegreeTypes = async () => {
 }
 
 
+
 const getDegreeFields = async () => {
     try {
         const { data } = await instance.get(
@@ -76,4 +77,18 @@ const getDegreeInstitutions = async () => {
 
 }
 
-export { getDegreeFields, getDegreeInstitutions, getDegreeTypes, getDestinationJobs, getJobTitles }
+const analyze = async (req) =>{
+    try{
+
+        const response = await instance.post(
+            '/analyze', req
+        );
+
+        return response.data;
+    }
+    catch(err) {
+        throw new Error(`domain: is not exist` + err);
+    }
+}
+
+export { getDegreeFields, getDegreeInstitutions, getDegreeTypes, getDestinationJobs, getJobTitles, analyze }

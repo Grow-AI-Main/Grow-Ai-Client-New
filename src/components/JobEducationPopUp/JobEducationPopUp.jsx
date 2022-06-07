@@ -62,7 +62,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             degreeInstitutions();
         }
         else if (barStatus === 2) {
-            setFirstFieldTitle('Job Title');
+            setFirstFieldTitle('JobTitle');
             setSecondFieldTitle('Company Name');
             setThirdFieldTitle('');
             setFourFieldTitle('Start Year & Month');

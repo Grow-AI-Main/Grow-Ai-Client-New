@@ -1,0 +1,47 @@
+{
+    "experiences": [
+        {
+            "duration": 29,
+            "JobTitle": "software engineer"
+        },
+        {
+            "duration": 21,
+            "JobTitle": "software engineer"
+        },
+        {
+            "duration": 20,
+            "JobTitle": "software engineer"
+        },
+        {
+            "duration": 27,
+            "JobTitle": "software engineer"
+        },
+        {
+            "duration": 18,
+            "JobTitle": "software engineer"
+        },
+        {
+            "duration": 18,
+            "JobTitle": "software engineer"
+        },
+        {
+            "duration": 26,
+            "JobTitle": "software engineer"
+        },
+        {
+            "duration": 26,
+            "JobTitle": "software engineering manager"
+        }
+    ],
+    "firstDegree": {
+    },
+    "secondDegree": {
+        "Degree field": "economics",
+        "institutionName": [
+            "university haifa",
+            "Tel Aviv University",
+            "Weizmann Institute of Science"
+        ],
+        "Degree type": "M.Sc."
+    }
+}
