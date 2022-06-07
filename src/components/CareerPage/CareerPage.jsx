@@ -13,7 +13,8 @@ import StepConnector, {
     stepConnectorClasses
 } from "@mui/material/StepConnector";
 import './index.css';
-import JsonData from '../../const/responseExample.json';
+import mockRequest from '../../const/mockRequest.json';
+import { analyze } from "../../services/backendService";
 
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
@@ -148,12 +149,12 @@ const ColorlibEducationStepIcon = (props) => {
 };
 
 
-const getUpdatedEducation = (education,firstEducationRecomended,secondEducationRecomended) => {
-    if(Object.keys(firstEducationRecomended).length !== 0 && Object.keys(secondEducationRecomended).length !== 0 ) {
+const getUpdatedEducation = (education, firstEducationRecomended, secondEducationRecomended) => {
+    if (Object.keys(firstEducationRecomended).length !== 0 && Object.keys(secondEducationRecomended).length !== 0) {
         education.push(firstEducationRecomended);
         education.push(secondEducationRecomended);
     }
-    else if (Object.keys(firstEducationRecomended).length === 0 && Object.keys(secondEducationRecomended).length !== 0 ) {
+    else if (Object.keys(firstEducationRecomended).length === 0 && Object.keys(secondEducationRecomended).length !== 0) {
         education.push(secondEducationRecomended);
     }
     return education;
@@ -165,53 +166,55 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
     const [accomplishedEducationNum, setAccomplishedEducationNum] = useState(0);
     const [educations, setEducations] = useState([]);
     const [accomplishedJob, setAccomplishedJob] = useState([]);
-    const [dreamJob, setDreamJob] = useState('');
     const [isEducationCompleted, setIsEducationCompleted] = useState(false);
     const [isExperienceCompleted, setIsExperienceCompleted] = useState(false);
 
 
 
     useEffect(() => {
+
+        const fetchData = async () => {
+            const returnJson = await analyze(mockRequest);
+            setEducation(returnJson)
+            setJobs(returnJson);
+        }
+
         if (barStatus === 3) {
             setIsEnable(true);
-            setEducation()
-            setJobs();
-            const dream = targetJob;
-            setDreamJob(dream);
-
+            fetchData();
         }
         else {
             setIsEnable(false);
         }
     }, [barStatus, experienceHistory, educationHistory, targetJob])
 
-    const setEducation = () => {
-        const firstDegree = JsonData.firstDegree;
-        const secondDegree = JsonData.secondDegree;
+    const setEducation = (returnJson) => {
+        const firstDegree = returnJson.firstDegreeRecommendation;
+        const secondDegree = returnJson.secondDegreeRecommendation;
         let currentEducations = [...educationHistory];
 
-        currentEducations = getUpdatedEducation(currentEducations,firstDegree,secondDegree);
+        currentEducations = getUpdatedEducation(currentEducations, firstDegree, secondDegree);
 
         setEducations(currentEducations);
         const position = educationHistory.length - 1;
         setAccomplishedEducationNum(position);
 
-        
-        if(educationHistory.length === currentEducations.length){
+
+        if (educationHistory.length === currentEducations.length) {
             setIsEducationCompleted(true);
         }
     }
 
-    const setJobs = () => {
-        const RecomendedExperiences = JsonData.experiences;
+    const setJobs = (returnJson) => {
+        const RecomendedExperiences = returnJson.experiences;
         const jobs = experienceHistory.concat(RecomendedExperiences);
         const position = experienceHistory.length - 1;
         setAccomplishedJobNum(position);
         setAccomplishedJob(jobs);
-        
+
         const currentPosition = position + 1;
-        
-        if( currentPosition === jobs.length){
+
+        if (currentPosition === jobs.length) {
             setIsExperienceCompleted(true);
         }
     }
@@ -230,14 +233,14 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                     <div className="recomended-div">
                         <Stepper alternativeLabel activeStep={accomplishedJobNum} connector={<ColorlibConnector />}>
                             {accomplishedJob.map((label, index) => (
-                                <Step key={label['Job Title'] + index}>
+                                <Step key={label['JobTitle'] + index}>
                                     <StepLabel StepIconComponent={ColorlibJobStepIcon}>
-                                        {label['Job Title']}<br />{label['duration'] ? "~ " + label['duration'] + " mo." : label['Company Name']}
+                                        {label['jobTitle']}<br />{label['duration'] ? "~ " + label['duration'] + " mo." : label['Company Name']}
                                     </StepLabel>
                                 </Step>
                             ))}
                             <Step completed={isExperienceCompleted}>
-                                <StepLabel StepIconComponent={ColorlibJobStepIcon}>{dreamJob}</StepLabel>
+                                <StepLabel StepIconComponent={ColorlibJobStepIcon}>{targetJob}</StepLabel>
                             </Step>
                         </Stepper>
                     </div>
@@ -251,9 +254,9 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                     <div className="recomended-div">
                         <Stepper alternativeLabel activeStep={accomplishedEducationNum} connector={<ColorlibConnector />}>
                             {educations.map((label, index) => (
-                                <Step completed={isEducationCompleted} key={label['Degree field']}>
+                                <Step completed={isEducationCompleted} key={label['field']}>
                                     <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
-                                        {<><>{label['Degree type'] + " " + label['Degree field']}</>
+                                        {<><>{label['type'] + " " + label['field']}</>
                                             <>{index > accomplishedEducationNum ? <><br /><ul>
                                                 {label['institutionName'].map((inst) => (<li>{inst}</li>))}</ul></> : <>{label['Instutation Name']}</>}</></>}
                                     </StepLabel>

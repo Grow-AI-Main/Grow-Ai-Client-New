@@ -80,10 +80,11 @@ const getDegreeInstitutions = async () => {
 const analyze = async (req) =>{
     try{
 
-        const { data } = await instance.post(
-            '/analyze', JSON.stringify(req)
+        const response = await instance.post(
+            '/analyze', req
         );
-        return data;
+
+        return response.data;
     }
     catch(err) {
         throw new Error(`domain: is not exist` + err);
