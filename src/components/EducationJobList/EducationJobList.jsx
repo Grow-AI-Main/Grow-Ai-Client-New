@@ -23,11 +23,10 @@ color:#FFFFFF;
 text-align: center;
 `;
 
-const EducationJobList = ({ educationHistory, expirienceHistory, barStatus }) => {
+const EducationJobList = ({ educationHistory, expirienceHistory, barStatus, setEducationHistory, setExpirienceHistory }) => {
     const [title, setTitle] = useState('');
     const [currentData, setCurrentData] = useState([]);
     const [isEnable, setIsEnable] = useState(false);
-
 
     useEffect(() => {
         if (barStatus === 1) {
@@ -42,10 +41,28 @@ const EducationJobList = ({ educationHistory, expirienceHistory, barStatus }) =>
         if ((barStatus === 1 || barStatus === 2) && currentData.length > 0) {
             setIsEnable(true);
         }
-        else{
+        else {
             setIsEnable(false);
         }
     }, [barStatus, educationHistory, expirienceHistory, currentData])
+
+
+    const removeEducationOrJob = (key) => {
+        let updatedData = [];
+
+        if (barStatus === 1) {
+            setCurrentData(educationHistory);
+            updatedData = [...educationHistory];
+            updatedData.splice(key, 1);
+            setEducationHistory([...updatedData]);
+        }
+        else if (barStatus === 2) {
+            setCurrentData(expirienceHistory);
+            updatedData = [...expirienceHistory];
+            updatedData.splice(key, 1);
+            setExpirienceHistory([...updatedData]);
+        }
+    }
 
     return (
         <>
@@ -53,8 +70,8 @@ const EducationJobList = ({ educationHistory, expirienceHistory, barStatus }) =>
                 <><TitleStyled>
                     {title}
                 </TitleStyled><EducationJobListStyled>
-                        {currentData.map((item) => (
-                            <EducationJobItem firstTitle={barStatus === 1 ? 'Instutation Name' : 'Job Title'} firstTitleValue={barStatus === 1 ? item['Instutation Name'] : item['Job Title']} secondTitle={barStatus === 1 ? 'Degree field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item['Degree field'] : item['Company Name']} />
+                        {currentData.map((item, index) => (
+                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'Instutation Name' : 'Job Title'} firstTitleValue={barStatus === 1 ? item['Instutation Name'] : item['Job Title']} secondTitle={barStatus === 1 ? 'Degree field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item['Degree field'] : item['Company Name']} removeEducationOrJob={removeEducationOrJob} />
                         ))}
                     </EducationJobListStyled></>
             }</>
