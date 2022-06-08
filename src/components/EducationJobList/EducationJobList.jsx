@@ -71,7 +71,7 @@ const EducationJobList = ({ educationHistory, expirienceHistory, barStatus, setE
                     {title}
                 </TitleStyled><EducationJobListStyled>
                         {currentData.map((item, index) => (
-                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'Instutation Name' : 'JobTitle'} firstTitleValue={barStatus === 1 ? item['Instutation Name'] : item['JobTitle']} secondTitle={barStatus === 1 ? 'Degree field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item['Degree field'] : item['Company Name']} removeEducationOrJob={removeEducationOrJob} />
+                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'InstutationName' : 'JobTitle'} firstTitleValue={barStatus === 1 ? item['InstutationName'] : item['JobTitle']} secondTitle={barStatus === 1 ? 'field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item['field'] : item['Company Name']} removeEducationOrJob={removeEducationOrJob} />
                         ))}
                     </EducationJobListStyled></>
             }</>
