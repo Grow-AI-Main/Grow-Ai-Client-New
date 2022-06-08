@@ -69,6 +69,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             setFiveFieldTitle('End Year & Month');
             setTitle('Expirience Information');
             setAcceptText("I've inserted my expirience");
+            setSelectedSecondFieldValue('')
             jobTitle();
         }
     }, [barStatus])

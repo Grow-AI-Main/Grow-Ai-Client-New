@@ -4,15 +4,15 @@ import EducationJobItem from "../EducationJobItem/EducationJobItem";
 
 
 const EducationJobListStyled = styled("div")`
-width: 40%;
-margin-left: 30%;
+width: 45%;
+margin-left: 26%;
 background-color: transparent;
 `;
 
 const TitleStyled = styled("div")`
-width: 40%;
+width: 45%;
 height: 6%;
-margin-left: 30%;
+margin-left: 26%;
 margin-top: 3%;
 background: #c5356a;
 border-radius: 6px 6px 0px 0px;
