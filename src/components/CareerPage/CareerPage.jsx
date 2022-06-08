@@ -173,21 +173,46 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
 
     useEffect(() => {
 
-        const fetchData = async () => {
-            const returnJson = await analyze(mockRequest);
+        const fetchData = async (req) => {
+            const returnJson = await analyze(req);
             setEducation(returnJson)
             setJobs(returnJson);
         }
 
         if (barStatus === 3) {
             setIsEnable(true);
-            fetchData();
+            const req = MakeRequest();
+            fetchData(req);
         }
         else {
             setIsEnable(false);
         }
     }, [barStatus, experienceHistory, educationHistory, targetJob])
 
+    const calculateDuration = (start, end) => {
+        let numMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth())
+        if (numMonths === 0 && end.getFullYear() === start.getFullYear() )
+            numMonths = 6
+        return numMonths
+    }
+    
+    const MakeRequest = () =>{
+        let job = [...experienceHistory]
+        let edu = [...educationHistory]
+
+        let req = {}
+        req.experiences = []
+        job.map((job)=>{
+            req.experiences.push({'jobTitle':job['JobTitle'], 'duration': calculateDuration(job['Start Year & Month'], job['End Year & Month'])})
+        })
+        edu.map((edu,index) => {
+            if (index === 0 ){ req.firstDegree = {'type': edu['Degree type'], 'field': edu['Degree field'], 'institutionName': edu['Instutation Name']}}
+            if (index === 1 ){ req.secondDegree = {'type': edu['Degree type'], 'field': edu['Degree field'], 'institutionName': edu['Instutation Name']}}
+        })
+        req.destination_job = targetJob
+        return req
+
+    }
     const setEducation = (returnJson) => {
         const firstDegree = returnJson.firstDegreeRecommendation;
         const secondDegree = returnJson.secondDegreeRecommendation;
