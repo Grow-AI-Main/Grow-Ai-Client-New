@@ -20,13 +20,13 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.active}`]: {
         [`& .${stepConnectorClasses.line}`]: {
             backgroundImage:
-                "linear-gradient( 136deg, rgb(228 189 204) 0%, rgb(197 53 106) 50%, rgb(197 53 106) 100%)"
+                "linear-gradient( 136deg, #7e969c 0%, #5d7d7d 50%, #43655a 100%)"
         }
     },
     [`&.${stepConnectorClasses.completed}`]: {
         [`& .${stepConnectorClasses.line}`]: {
             backgroundImage:
-                "linear-gradient( 136deg, rgb(228 189 204) 0%, rgb(197 53 106) 50%, rgb(197 53 106) 100%)"
+                "linear-gradient( 136deg, #7e969c 0%, #5d7d7d 50%, #43655a 100%)"
         }
     },
     [`& .${stepConnectorClasses.line}`]: {
@@ -51,12 +51,12 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
     alignItems: "center",
     ...(ownerState.active && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(228 189 204) 0%, rgb(22 130 253) 50%, rgb(22 130 253) 100%)",
+            "linear-gradient( 136deg, #e5e5e5 0%, #43655a 50%, #7e969c 100%)",
         boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)"
     }),
     ...(ownerState.completed && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(228 189 204) 0%, rgb(22 130 253) 50%, rgb(22 130 253) 100%)"
+            "linear-gradient( 136deg, #e5e5e5 0%, #43655a 50%, #7e969c 100%)"
     })
 }));
 
@@ -90,7 +90,7 @@ const steps = [
 const ProgressBar = ({ barStatus }) => {
     return (
         <div className="stepper-div">
-            <Stepper alternativeLabel activeStep={barStatus} connector={<ColorlibConnector />}>
+            <Stepper sx={{marginTop:'45px'}} alternativeLabel activeStep={barStatus} connector={<ColorlibConnector />}>
                 {steps.map((label) => (
                     <Step key={label}>
                         <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>

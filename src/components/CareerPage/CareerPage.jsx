@@ -13,7 +13,6 @@ import StepConnector, {
     stepConnectorClasses
 } from "@mui/material/StepConnector";
 import './index.css';
-import mockRequest from '../../const/mockRequest.json';
 import { analyze } from "../../services/backendService";
 
 
@@ -79,7 +78,7 @@ const ColorlibMainIconRoot = styled("div")(({ theme, ownerState }) => ({
     alignItems: "center",
     ...(ownerState.active && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(0 128 255) 0%, #0080ff 50%, rgb(22 130 253 / 65%) 100%)",
+            "linear-gradient( 136deg, #e5e5e5 0%, #43655a 50%, #7e969c 100%)",
         boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)"
     }),
     ...(ownerState.completed && {
@@ -203,7 +202,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         let req = {}
         req.experiences = []
         job.map((job)=>{
-            req.experiences.push({'jobTitle':job['JobTitle'], 'duration': calculateDuration(job['Start Year & Month'], job['End Year & Month'])})
+            req.experiences.push({'jobTitle':job['Job Title'], 'duration': calculateDuration(job['Start Year & Month'], job['End Year & Month'])})
         })
         edu.map((edu,index) => {
             if (index === 0 ){ req.firstDegree = {'type': edu['type'], 'field': edu['field'], 'institutionName': edu['InstutationName']}}

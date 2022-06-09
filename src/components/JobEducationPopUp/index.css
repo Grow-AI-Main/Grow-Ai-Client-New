@@ -1,6 +1,6 @@
 .accept-buuton {
     color: white;
-    background: #F48023;
+    background: #43655A;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     width: 230px;
@@ -10,33 +10,36 @@
 
 .popup-buuton {
     color: white;
-    background: #F48023;
+    background: #7e969c;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     width: 185px;
     height: 45px;
     margin-top: 45px;
+    border-radius: 92px;
 }
 
 .next-buuton {
     color: white;
-    background: #1682FD;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    background: #43655A;
+    box-shadow: 0px 2px 8px rgb(0 0 0 / 15%);
     border-radius: 8px;
     width: 185px;
     height: 45px;
     margin-top: 15px;
+    border-radius: 92px;
 }
 
 .prev-buuton {
     color: white;
-    background:  #c5356a;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    background: #5d7d7d;
+    box-shadow: 0px 2px 8px rgb(0 0 0 / 15%);
     border-radius: 8px;
     width: 185px;
     height: 45px;
     margin-top: 15px;
     margin-right: 50px;
+    border-radius: 92px;
 }
 
 .text-fields{
