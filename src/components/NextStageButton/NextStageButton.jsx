@@ -15,7 +15,7 @@ const NextStageButton = ({ barStatus, setNextStep, setPrevStep }) => {
 
     useEffect(() => {
         if (barStatus !== 0) {
-            if (barStatus < 3) {
+            if (barStatus < 4) {
                 setIsNextEnable(true);
             }
             else {

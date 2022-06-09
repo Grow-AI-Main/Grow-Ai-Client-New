@@ -8,8 +8,10 @@ import JobEducationPopUp from './components/JobEducationPopUp/JobEducationPopUp'
 import NextStageButton from './components/NextStageButton/NextStageButton';
 import EducationJobList from './components/EducationJobList/EducationJobList';
 import CareerPage from './components/CareerPage/CareerPage';
+import NextStepPage from './components/NextStepPage/NextStepPage';
 import BackgroundImage from '../src/BackgroundImagePath.png';
 import './App.css';
+
 
 const App = () => {
     const [barStatus, setBarStatus] = useState(0);
@@ -43,6 +45,7 @@ const App = () => {
                 <EducationJobList educationHistory={educationHistory} expirienceHistory={expirienceHistory} barStatus={barStatus} setEducationHistory ={setEducationHistory} setExpirienceHistory={setExpirienceHistory}/>
                 <JobEducationPopUp barStatus={barStatus} setOpenPopUp={setOpenPopUp} openPopUp={openPopUp} addExpirience={addExpirience} addEducation={addEducation} />
                 <CareerPage barStatus={barStatus} experienceHistory={expirienceHistory} educationHistory={educationHistory} targetJob={currentPosition} />
+                <NextStepPage barStatus={barStatus} />
                 <OpenDialogButton buttonText={"Add Education"} setOpenPopUp={setOpenPopUp} barStatus={barStatus} />
                 <NextStageButton barStatus={barStatus} setNextStep={setNextStep} setPrevStep={setPrevStep} />
             </StyledEngineProvider>
