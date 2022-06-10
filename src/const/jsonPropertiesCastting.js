@@ -1,9 +1,9 @@
 const jsonPropertiesCastting = {
-    "Job Title": "JobTitle",
-    "Company Name": "CompanyName",
+    "Job Title": "jobTitle",
+    "Company Name": "companyName",
     "Degree Type": "type",
     "Degree Field":"field",
-    "Instution Name": "instutationName",
+    "Instutation Name": "instutationName",
 }
 
 export { jsonPropertiesCastting }

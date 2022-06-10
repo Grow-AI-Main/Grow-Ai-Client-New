@@ -32,6 +32,7 @@ const EducationJobList = ({ educationHistory, expirienceHistory, barStatus, setE
     useEffect(() => {
         if (barStatus === 1) {
             setTitle('Educational Summary');
+            console.log(educationHistory)
             setCurrentData(educationHistory);
         }
         else if (barStatus === 2) {
