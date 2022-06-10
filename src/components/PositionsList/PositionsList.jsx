@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import Position from "../Position/Position";
 import { styled } from "@mui/material/styles";
 import { getDestinationJobs } from "../../services/backendService";
+import { mockButtons } from "../../const/mockButtons";
 
 
 const PositionListStyled = styled("div")`
@@ -40,7 +41,15 @@ const PositionList = ({ barStatus, setCurrentPosition, setNextStep }) => {
                         {
                             positions.map((item, index) => (
                                 <Grid item spacing={3} key={index}>
-                                    <Position setCurrentPosition={setCurrentPosition} text={item} setNextStep={setNextStep}/>
+                                    <Position isDisabled ={false} setCurrentPosition={setCurrentPosition} text={item} setNextStep={setNextStep} />
+                                </Grid>
+                            ))
+                        }
+
+                        {
+                            mockButtons.map((item, index) => (
+                                <Grid item spacing={3} key={index}>
+                                    <Position isDisabled ={true} setCurrentPosition={setCurrentPosition} text={item} setNextStep={setNextStep} />
                                 </Grid>
                             ))
                         }

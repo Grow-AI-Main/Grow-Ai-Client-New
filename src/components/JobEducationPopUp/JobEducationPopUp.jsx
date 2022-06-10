@@ -4,6 +4,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { getDegreeTypes, getDegreeFields, getDegreeInstitutions, getJobTitles } from "../../services/backendService";
+import { jsonPropertiesCastting } from "../../const/jsonPropertiesCastting";
 import './index.css';
 
 const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, addEducation }) => {
@@ -50,9 +51,9 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
 
 
         if (barStatus === 1) {
-            setFirstFieldTitle('Degree type');
-            setSecondFieldTitle('Degree field');
-            setThirdFieldTitle('Instutation Name');
+            setFirstFieldTitle('field');
+            setSecondFieldTitle('type');
+            setThirdFieldTitle('InstutationName');
             setFourFieldTitle('Start Year');
             setFiveFieldTitle('Graduation Year');
             setTitle('Education Information');
@@ -62,7 +63,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             degreeInstitutions();
         }
         else if (barStatus === 2) {
-            setFirstFieldTitle('JobTitle');
+            setFirstFieldTitle('Job Title');
             setSecondFieldTitle('Company Name');
             setThirdFieldTitle('');
             setFourFieldTitle('Start Year & Month');
@@ -83,7 +84,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
         handleClose();
 
         let newItem = {}
-        newItem[firstFieldTitle] = selectedFirstFieldValue;
+        newItem[jsonPropertiesCastting[firstFieldTitle]] = selectedFirstFieldValue;
         newItem[secondFieldTitle] = selectedSecondFieldValue;
         newItem[fourFieldTitle] = startYear;
         newItem[fiveFieldTitle] = endYear;

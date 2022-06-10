@@ -2,19 +2,19 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 
 const PositionStyled = styled("button")`
-    width: 250px;
-    height: 75px;
-    border-radius: 70px;
-    background: transparent;
-    color: #1682fd;
-    font-size: larger;
-    font-family: inherit;
+width: 215px;
+height: 60px;
+border-radius: 70px;
+background: white;
+color: #43655A;
+font-size: larger;
+font-family: inherit;
 `;
 
-const Position = ({ text, setCurrentPosition, setNextStep }) => {
+const Position = ({ isDisabled, text, setCurrentPosition, setNextStep }) => {
     return (
         <>
-            <PositionStyled onClick={(e) => {
+            <PositionStyled disabled={isDisabled} onClick={(e) => {
                 setCurrentPosition(text);
                 setNextStep();
             }}>

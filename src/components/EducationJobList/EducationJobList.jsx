@@ -5,16 +5,16 @@ import EducationJobItem from "../EducationJobItem/EducationJobItem";
 
 const EducationJobListStyled = styled("div")`
 width: 45%;
-margin-left: 26%;
+margin-left: 27%;
 background-color: transparent;
 `;
 
 const TitleStyled = styled("div")`
 width: 45%;
 height: 6%;
-margin-left: 26%;
+margin-left: 27%;
 margin-top: 3%;
-background: #c5356a;
+background: #005A34;
 border-radius: 6px 6px 0px 0px;
 font-style: normal;
 font-size: 25px;
@@ -71,7 +71,7 @@ const EducationJobList = ({ educationHistory, expirienceHistory, barStatus, setE
                     {title}
                 </TitleStyled><EducationJobListStyled>
                         {currentData.map((item, index) => (
-                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'Instutation Name' : 'JobTitle'} firstTitleValue={barStatus === 1 ? item['Instutation Name'] : item['JobTitle']} secondTitle={barStatus === 1 ? 'Degree field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item['Degree field'] : item['Company Name']} removeEducationOrJob={removeEducationOrJob} />
+                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'InstutationName' : 'Job Title'} firstTitleValue={barStatus === 1 ? item['InstutationName'] : item['JobTitle']} secondTitle={barStatus === 1 ? 'Education Field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item['field'] : item['Company Name']} removeEducationOrJob={removeEducationOrJob} />
                         ))}
                     </EducationJobListStyled></>
             }</>

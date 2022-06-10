@@ -42,7 +42,7 @@ const NextStageButton = ({ barStatus, setNextStep, setPrevStep }) => {
         <>
             <OpenDialogButtonStyled>
                 {isPrevEnable &&
-                    <Button onClick={setPrevStage} className="prev-buuton">Back Stage</Button>
+                    <Button onClick={setPrevStage} className="prev-buuton">Previous Stage</Button>
                 }
                 {isNextEnable &&
                     <Button onClick={setNextStage} className="next-buuton">Next Stage</Button>
