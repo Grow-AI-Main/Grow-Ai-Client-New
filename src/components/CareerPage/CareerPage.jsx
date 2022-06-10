@@ -9,6 +9,7 @@ import WorkHistoryRoundedIcon from '@mui/icons-material/WorkHistoryRounded';
 import HistoryEduRoundedIcon from '@mui/icons-material/HistoryEduRounded';
 import AssignmentTurnedInRoundedIcon from '@mui/icons-material/AssignmentTurnedInRounded';
 import BookmarkAddedRoundedIcon from '@mui/icons-material/BookmarkAddedRounded';
+import {jsonPropertiesCastting} from '../../const/jsonPropertiesCastting';
 import StepConnector, {
     stepConnectorClasses
 } from "@mui/material/StepConnector";

@@ -51,9 +51,9 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
 
 
         if (barStatus === 1) {
-            setFirstFieldTitle('field');
-            setSecondFieldTitle('type');
-            setThirdFieldTitle('InstutationName');
+            setFirstFieldTitle('Degree Field');
+            setSecondFieldTitle('Degree Type');
+            setThirdFieldTitle('Instutation Name');
             setFourFieldTitle('Start Year');
             setFiveFieldTitle('Graduation Year');
             setTitle('Education Information');
@@ -85,12 +85,12 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
 
         let newItem = {}
         newItem[jsonPropertiesCastting[firstFieldTitle]] = selectedFirstFieldValue;
-        newItem[secondFieldTitle] = selectedSecondFieldValue;
+        newItem[jsonPropertiesCastting[secondFieldTitle]] = selectedSecondFieldValue;
         newItem[fourFieldTitle] = startYear;
         newItem[fiveFieldTitle] = endYear;
 
         if (barStatus === 1) {
-            newItem[thirdFieldTitle] = selectedThirdFieldValue;
+            newItem[jsonPropertiesCastting[thirdFieldTitle]] = selectedThirdFieldValue;
             addEducation(newItem);
         }
         else if (barStatus === 2) {
