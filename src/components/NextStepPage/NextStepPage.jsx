@@ -4,6 +4,7 @@ import { border, borderRadius } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import JasonData from '../../const/MockJobOpening.json';
 import BusinessIcon from '@mui/icons-material/Business';
+import '../JobEducationPopUp/index.css';
 
 const openingSection = {
     borderRadius:'16px',
@@ -11,14 +12,14 @@ const openingSection = {
     justifyContent:'center',
     width:'1140px',
     height:'366px',
-    backgroundImage: "linear-gradient(107.15deg, #EFAFBC 0%, #C3E3FA 100%)",
+    backgroundColor:'#FFFFFF',
 }
 
 const openingItem = {
     borderRadius:'16px',
     margin:'auto',
     justifyContent:'center',
-    backgroundColor: "#DDC4D5",
+    backgroundColor: "#E5E5E5",
     width:'273px',
     height:'279px',
 }
@@ -32,7 +33,7 @@ const JobOpening = (JobTitle, CompanyName, Description, Link) =>
         <Typography variant="h6">{"Job Title: " + JobTitle}</Typography>
         <Typography variant="h6">{"Company Name:"+ CompanyName}</Typography>
         <Typography variant="h6">{"Description :" + Description}</Typography>
-        <Button variant="contained" href={Link}>Click me!</Button>
+        <Button className="next-buuton" href={Link}>Click me!</Button>
     </Grid>)
 
 }
@@ -70,7 +71,7 @@ const NextStepPage = ({barStatus}) =>
         <div style={{margin:'auto'}}>
             <Grid container spacing={4} sx={openingSection}>
                 <Grid item>
-                    <Typography variant="h5" color="#934405">Job openings</Typography>
+                    <Typography variant="h5" color="#43655A">Job openings</Typography>
                 </Grid>
                 <Grid container spacing={4} justifyContent="center">
                     {openings}
@@ -82,7 +83,7 @@ const NextStepPage = ({barStatus}) =>
         <div style={{margin:'auto'}}>
             <Grid container spacing={4} sx={openingSection}>
                 <Grid item>
-                    <Typography variant="h5" color="#934405">Education openings</Typography>
+                    <Typography variant="h5" color="#43655A">Education openings</Typography>
                 </Grid>
                 <Grid container spacing={4} justifyContent="center">
                     {openings}
