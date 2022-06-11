@@ -9,6 +9,7 @@ import WorkHistoryRoundedIcon from '@mui/icons-material/WorkHistoryRounded';
 import HistoryEduRoundedIcon from '@mui/icons-material/HistoryEduRounded';
 import AssignmentTurnedInRoundedIcon from '@mui/icons-material/AssignmentTurnedInRounded';
 import BookmarkAddedRoundedIcon from '@mui/icons-material/BookmarkAddedRounded';
+import {jsonPropertiesCastting} from '../../const/jsonPropertiesCastting';
 import StepConnector, {
     stepConnectorClasses
 } from "@mui/material/StepConnector";
@@ -198,17 +199,19 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
     const MakeRequest = () =>{
         let job = [...experienceHistory]
         let edu = [...educationHistory]
-
+        console.log(job)
+        console.log(edu)
         let req = {}
         req.experiences = []
         job.map((job)=>{
-            req.experiences.push({'jobTitle':job['Job Title'], 'duration': calculateDuration(job['Start Year & Month'], job['End Year & Month'])})
+            req.experiences.push({'jobTitle':job['jobTitle'], 'duration': calculateDuration(job['Start Year & Month'], job['End Year & Month'])})
         })
         edu.map((edu,index) => {
-            if (index === 0 ){ req.firstDegree = {'type': edu['type'], 'field': edu['field'], 'institutionName': edu['InstutationName']}}
-            if (index === 1 ){ req.secondDegree = {'type': edu['type'], 'field': edu['field'], 'institutionName': edu['InstutationName']}}
+            if (index === 0 ){ req.firstDegree = {'type': edu['type'], 'field': edu['field'], 'institutionName': edu['instutationName']}}
+            if (index === 1 ){ req.secondDegree = {'type': edu['type'], 'field': edu['field'], 'institutionName': edu['instutationName']}}
         })
         req.destination_job = targetJob
+        console.log(req)
         return req
 
     }
@@ -257,9 +260,9 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                     <div className="recomended-div">
                         <Stepper alternativeLabel activeStep={accomplishedJobNum} connector={<ColorlibConnector />}>
                             {accomplishedJob.map((label, index) => (
-                                <Step key={label['JobTitle'] + index}>
+                                <Step key={label['jobTitle'] + index}>
                                     <StepLabel StepIconComponent={ColorlibJobStepIcon}>
-                                        {label['JobTitle']}<br />{label['duration'] ? "~ " + label['duration'] + " mo." : label['Company Name']}
+                                        {label['jobTitle']}<br />{label['duration'] ? "~ " + label['duration'] + " mo." : label['companyName']}
                                     </StepLabel>
                                 </Step>
                             ))}
@@ -280,7 +283,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                             {educations.map((label, index) => (
                                 <Step completed={isEducationCompleted} key={label['field']}>
                                     <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
-                                        {<>{label['type'] + " " + label['field']}<br/>{label['InstitutionName']}</>}
+                                        {<>{label['type'] + " " + label['field']}<br/>{label['instutationName']}</>}
                                     </StepLabel>
                                 </Step>
                             ))}

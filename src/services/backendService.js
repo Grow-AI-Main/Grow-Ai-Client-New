@@ -2,13 +2,13 @@ import axios from 'axios';
 
 const instance = axios.create(
     {
-            baseURL: "http://localhost:8080",
-            withCredentials: false,
-            headers: {
-              'Access-Control-Allow-Origin' : '*',
-              'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
-          }
-      })
+        baseURL: "http://localhost:8080",
+        withCredentials: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
+    })
 
 const getJobTitles = async () => {
     try {
@@ -17,8 +17,8 @@ const getJobTitles = async () => {
         );
         return resaponse.data.titles;
     }
-    catch {
-        throw new Error(`domain: is not exist`);
+    catch (err) {
+        throw new Error(`Inernal Server Error` + err);
     }
 
 }
@@ -30,8 +30,8 @@ const getDestinationJobs = async () => {
         );
         return resaponse.data.destination_jobs;
     }
-    catch(err) {
-        throw new Error(`domain: is not exist` + err);
+    catch (err) {
+        throw new Error(`Inernal Server Error` + err);
     }
 
 }
@@ -43,8 +43,8 @@ const getDegreeTypes = async () => {
         );
         return resaponse.data.types;
     }
-    catch {
-        throw new Error(`domain: is not exist`);
+    catch (err) {
+        throw new Error(`Inernal Server Error` + err);
     }
 
 }
@@ -58,8 +58,8 @@ const getDegreeFields = async () => {
         );
         return resaponse.data.fields;
     }
-    catch(err) {
-        throw new Error(`domain: is not exist` + err);
+    catch (err) {
+        throw new Error(`Inernal Server Error` + err);
     }
 
 }
@@ -71,14 +71,27 @@ const getDegreeInstitutions = async () => {
         );
         return resaponse.data.institutions;
     }
-    catch {
-        throw new Error(`domain: is not exist`);
+    catch (err) {
+        throw new Error(`Inernal Server Error` + err);
     }
 
 }
 
-const analyze = async (req) =>{
-    try{
+const getProfileData = async (profile_id) => {
+    try {
+        const resaponse = await instance.get(
+            `/resources/linkedin/profile/${profile_id}`
+        );
+        return resaponse.data.fields;
+    }
+    catch (err) {
+        throw new Error(`Inernal Server Error` + err);
+    }
+
+}
+
+const analyze = async (req) => {
+    try {
 
         const response = await instance.post(
             '/analyze', req
@@ -86,9 +99,9 @@ const analyze = async (req) =>{
 
         return response.data;
     }
-    catch(err) {
-        throw new Error(`domain: is not exist` + err);
+    catch (err) {
+        throw new Error(`Inernal Server Error` + err);
     }
 }
 
-export { getDegreeFields, getDegreeInstitutions, getDegreeTypes, getDestinationJobs, getJobTitles, analyze }
+export { getDegreeFields, getDegreeInstitutions, getDegreeTypes, getDestinationJobs, getJobTitles, analyze, getProfileData }
