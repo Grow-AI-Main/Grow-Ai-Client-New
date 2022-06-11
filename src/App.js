@@ -9,7 +9,6 @@ import NextStageButton from './components/NextStageButton/NextStageButton';
 import EducationJobList from './components/EducationJobList/EducationJobList';
 import CareerPage from './components/CareerPage/CareerPage';
 import NextStepPage from './components/NextStepPage/NextStepPage';
-import BackgroundImage from '../src/BackgroundImagePath.png';
 import './App.css';
 
 
