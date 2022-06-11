@@ -55,12 +55,12 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
     textAlign: 'left',
     ...(ownerState.active && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(255 133 43) 0%, #f48023 50%, rgb(22 130 253 / 65%) 100%)",
+            "linear-gradient( 136deg, rgb(92 120 111) 0%, #5d7d7d 50%, rgb(67 101 90) 100%)",
         boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)"
     }),
     ...(ownerState.completed && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(219 131 65) 0%, #e58235 50%, rgb(228 130 54) 100%)"
+            "linear-gradient( 136deg, rgb(92 120 111) 0%, #5d7d7d 50%, rgb(67 101 90) 100%)"
     })
 }));
 
@@ -174,8 +174,10 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
 
         const fetchData = async (req) => {
             const returnJson = await analyze(req);
-            setEducation(returnJson)
-            setJobs(returnJson);
+            const validData = validateData(returnJson);
+
+            setEducation(validData)
+            setJobs(validData);
         }
 
         if (barStatus === 3) {
@@ -187,6 +189,13 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
             setIsEnable(false);
         }
     }, [barStatus, experienceHistory, educationHistory, targetJob])
+
+
+    const validateData = (returnJson) => {
+        const validData = returnJson.experiences.filter((experience) => experience.jobTitle !== '');
+        returnJson.experiences = validData;
+        return returnJson;
+    };
 
     const calculateDuration = (start, end) => {
         let numMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth())
@@ -200,16 +209,16 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         let edu = [...educationHistory]
         let req = {}
         req.experiences = []
-        
+
         job.map((job) =>
             req.experiences.push({ 'jobTitle': job['jobTitle'], 'duration': calculateDuration(job['Start Year & Month'], job['End Year & Month']) })
         )
-        
+
         edu.map((edu, index) => {
             if (index === 0) { req.firstDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['instutationName'] } }
             if (index === 1) { req.secondDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['instutationName'] } }
         })
-        
+
         req.destination_job = targetJob
         return req
 
@@ -224,7 +233,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         setEducations(currentEducations);
         const position = educationHistory.length;
         setAccomplishedEducationNum(position);
-
+ 
 
         if (educationHistory.length === currentEducations.length) {
             setIsEducationCompleted(true);

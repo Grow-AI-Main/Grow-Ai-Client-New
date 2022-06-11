@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import EducationJobItem from "../EducationJobItem/EducationJobItem";
-import {jsonPropertiesCastting} from '../../const/jsonPropertiesCastting';
+import { jsonPropertiesCastting } from '../../const/jsonPropertiesCastting';
 
 
 const EducationJobListStyled = styled("div")`
@@ -15,7 +15,7 @@ width: 45%;
 height: 6%;
 margin-left: 27%;
 margin-top: 3%;
-background: #005A34;
+background: #5d7d7d;
 border-radius: 6px 6px 0px 0px;
 font-style: normal;
 font-size: 25px;
