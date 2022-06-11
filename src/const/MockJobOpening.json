@@ -20,5 +20,25 @@
         "Description": "C++ Developer",
         "Link": "http://growai.cs.colman.ac.il/ping"
 
-    }]
+    }],
+    "Educations":[
+        {
+            "Type":"Bsc.",
+            "Field":"Computer Science",
+            "InstatutionName":"Technion",
+            "Link":"http://growai.cs.colman.ac.il/ping"
+        },
+        {
+            "Type":"Bsc.",
+            "Field":"Computer Science",
+            "InstatutionName":"Tel Aviv University",
+            "Link":"http://growai.cs.colman.ac.il/ping"
+        },
+        {
+            "Type":"Bsc.",
+            "Field":"Computer Science",
+            "InstatutionName":"College of Managment",
+            "Link":"http://growai.cs.colman.ac.il/ping"
+        }
+    ]
 }
