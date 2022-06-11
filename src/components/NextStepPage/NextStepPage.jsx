@@ -10,7 +10,7 @@ const openingSection = {
     margin: 'auto',
     justifyContent: 'center',
     width: '1140px',
-    height: '366px',
+    height: '400px',
     backgroundColor: '#FFFFFF',
 }
 
@@ -20,7 +20,7 @@ const openingItem = {
     justifyContent: 'center',
     backgroundColor: "#E5E5E5",
     width: '273px',
-    height: '279px',
+    height: '300px',
 }
 
 const JobOpening = (JobTitle, CompanyName, Description, Link) => {
