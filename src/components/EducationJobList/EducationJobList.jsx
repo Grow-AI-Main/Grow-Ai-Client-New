@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import EducationJobItem from "../EducationJobItem/EducationJobItem";
+import {jsonPropertiesCastting} from '../../const/jsonPropertiesCastting';
 
 
 const EducationJobListStyled = styled("div")`
@@ -71,7 +72,7 @@ const EducationJobList = ({ educationHistory, expirienceHistory, barStatus, setE
                     {title}
                 </TitleStyled><EducationJobListStyled>
                         {currentData.map((item, index) => (
-                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'InstutationName' : 'Job Title'} firstTitleValue={barStatus === 1 ? item['InstutationName'] : item['JobTitle']} secondTitle={barStatus === 1 ? 'Education Field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item['field'] : item['Company Name']} removeEducationOrJob={removeEducationOrJob} />
+                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'Instutation Name' : 'Job Title'} firstTitleValue={barStatus === 1 ? item[jsonPropertiesCastting['Instutation Name']] : item[jsonPropertiesCastting['Job Title']]} secondTitle={barStatus === 1 ? 'Degree Field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item[jsonPropertiesCastting['Degree Field']] : item[jsonPropertiesCastting['Company Name']]} removeEducationOrJob={removeEducationOrJob} />
                         ))}
                     </EducationJobListStyled></>
             }</>

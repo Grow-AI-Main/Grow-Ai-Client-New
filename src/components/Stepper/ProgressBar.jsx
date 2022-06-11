@@ -7,6 +7,7 @@ import Filter1OutlinedIcon from '@mui/icons-material/Filter1Outlined';
 import Filter2OutlinedIcon from '@mui/icons-material/Filter2Outlined';
 import Filter3OutlinedIcon from '@mui/icons-material/Filter3Outlined';
 import Filter4OutlinedIcon from '@mui/icons-material/Filter4Outlined';
+import Filter5OutlinedIcon from '@mui/icons-material/Filter5Outlined';
 import StepConnector, {
     stepConnectorClasses
 } from "@mui/material/StepConnector";
@@ -67,7 +68,8 @@ const ColorlibStepIcon = (props) => {
         1: <Filter1OutlinedIcon />,
         2: <Filter2OutlinedIcon />,
         3: <Filter3OutlinedIcon />,
-        4: <Filter4OutlinedIcon />
+        4: <Filter4OutlinedIcon />,
+        5: <Filter5OutlinedIcon />
     };
 
     return (
@@ -84,7 +86,8 @@ const steps = [
     "What's your dream job ?",
     "What have you study so far ?",
     "What have you done so far ?",
-    "What's your tailor-made career path ?"
+    "What's your tailor-made career path ?",
+    "What's your next step?"
 ];
 
 const ProgressBar = ({ barStatus }) => {
