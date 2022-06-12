@@ -53,7 +53,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
         if (barStatus === 1) {
             setFirstFieldTitle('Degree Field');
             setSecondFieldTitle('Degree Type');
-            setThirdFieldTitle('Instutation Name');
+            setThirdFieldTitle('Institution Name');
             setFourFieldTitle('Start Year');
             setFiveFieldTitle('Graduation Year');
             setTitle('Insert Education Item');

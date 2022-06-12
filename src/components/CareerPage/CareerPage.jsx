@@ -215,8 +215,8 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         )
 
         edu.map((edu, index) => {
-            if (index === 0) { req.firstDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['instutationName'] } }
-            if (index === 1) { req.secondDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['instutationName'] } }
+            if (index === 0) { req.firstDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['institutionName'] } }
+            if (index === 1) { req.secondDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['institutionName'] } }
         })
 
         req.destination_job = targetJob
@@ -233,8 +233,8 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         setEducations(currentEducations);
         const position = educationHistory.length;
         setAccomplishedEducationNum(position);
- 
-
+        
+        console.log(currentEducations)
         if (educationHistory.length === currentEducations.length) {
             setIsEducationCompleted(true);
         }
@@ -291,7 +291,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                             {educations.map((label, index) => (
                                 <Step completed={isEducationCompleted} key={label['field']}>
                                     <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
-                                        {<>{label['type'] + " " + label['field']}<br />{label['instutationName']}</>}
+                                        {<>{label['type'] + " " + label['field']}<br />{label['institutionName']}</>}
                                     </StepLabel>
                                 </Step>
                             ))}
