@@ -18,7 +18,7 @@ const getJobTitles = async () => {
         return resaponse.data.titles;
     }
     catch (err) {
-        throw new Error(`Inernal Server Error` + err);
+        console.log(`Inernal Server Error` + err);
     }
 
 }
@@ -31,7 +31,7 @@ const getDestinationJobs = async () => {
         return resaponse.data.destination_jobs;
     }
     catch (err) {
-        throw new Error(`Inernal Server Error` + err);
+        console.log(`Inernal Server Error` + err);
     }
 
 }
@@ -44,12 +44,10 @@ const getDegreeTypes = async () => {
         return resaponse.data.types;
     }
     catch (err) {
-        throw new Error(`Inernal Server Error` + err);
+        console.log(`Inernal Server Error` + err);
     }
 
 }
-
-
 
 const getDegreeFields = async () => {
     try {
@@ -59,7 +57,7 @@ const getDegreeFields = async () => {
         return resaponse.data.fields;
     }
     catch (err) {
-        throw new Error(`Inernal Server Error` + err);
+        console.log(`Inernal Server Error` + err);
     }
 
 }
@@ -72,7 +70,7 @@ const getDegreeInstitutions = async () => {
         return resaponse.data.institutions;
     }
     catch (err) {
-        throw new Error(`Inernal Server Error` + err);
+        console.log(`Inernal Server Error` + err);
     }
 
 }
@@ -82,10 +80,10 @@ const getProfileData = async (profile_id) => {
         const resaponse = await instance.get(
             `/resources/linkedin/profile/${profile_id}`
         );
-        return resaponse.data.fields;
+        return resaponse.data;
     }
     catch (err) {
-        throw new Error(`Inernal Server Error` + err);
+        console.log(`Inernal Server Error` + err);
     }
 
 }
@@ -100,7 +98,7 @@ const analyze = async (req) => {
         return response.data;
     }
     catch (err) {
-        throw new Error(`Inernal Server Error` + err);
+        console.log(`Inernal Server Error` + err);
     }
 }
 
