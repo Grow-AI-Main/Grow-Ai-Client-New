@@ -56,7 +56,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             setThirdFieldTitle('Instutation Name');
             setFourFieldTitle('Start Year');
             setFiveFieldTitle('Graduation Year');
-            setTitle('Education Information');
+            setTitle('Insert Education Item');
             setAcceptText("I've inserted my education");
             degreeFields();
             degreeTypes();
@@ -68,8 +68,8 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             setThirdFieldTitle('');
             setFourFieldTitle('Start Year & Month');
             setFiveFieldTitle('End Year & Month');
-            setTitle('Expirience Information');
-            setAcceptText("I've inserted my expirience");
+            setTitle('Insert Job Item');
+            setAcceptText("I've inserted my job");
             setSelectedSecondFieldValue('')
             jobTitle();
         }

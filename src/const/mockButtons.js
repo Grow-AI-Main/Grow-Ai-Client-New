@@ -1,3 +1,3 @@
-const mockButtons = ['UI UX Designer','Full Stack Developer','Product','Product Manager','Automation Developer']
+const mockButtons = ['UI UX Designer','Full Stack Developer','Marketing Team Lead','Product Manager','Automation Developer']
 
 export {mockButtons}
