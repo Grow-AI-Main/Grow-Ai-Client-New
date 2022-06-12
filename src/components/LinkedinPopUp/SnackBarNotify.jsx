@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import CloseIcon from '@material-ui/icons/Close';
 import amber from '@material-ui/core/colors/amber';
@@ -62,19 +62,7 @@ const MySnackbarContentWrapper = withStyles(snackBarStyle)(MySnackbarContent);
 
 const SnackBarNotify = ({ notifyStatus, setNotifyStatus }) => {
 
-    const [notifyOpen, setNotifyOpen] = useState({ open: false });
-
-    useEffect(() => {
-        if (notifyStatus === false) {
-            setNotifyOpen(false);
-        }
-        else {
-            setNotifyOpen(true);
-        }
-    }, [notifyStatus])
-
     const handleClose = () => {
-        setNotifyOpen(false);
         setNotifyStatus(false);
     };
 
@@ -85,7 +73,7 @@ const SnackBarNotify = ({ notifyStatus, setNotifyStatus }) => {
                     vertical: 'bottom',
                     horizontal: 'center',
                 }}
-                open={notifyOpen}
+                open={notifyStatus}
                 autoHideDuration={4000}
                 onClose={handleClose}
             >
