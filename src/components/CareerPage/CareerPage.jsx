@@ -270,7 +270,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                             {accomplishedJob.map((label, index) => (
                                 <Step key={label['jobTitle'] + index}>
                                     <StepLabel StepIconComponent={ColorlibJobStepIcon}>
-                                        {label['jobTitle']}<br />{label['duration'] ? "~ " + label['duration'] + " mo." : label['companyName']}
+                                        {label['jobTitle']}<br />{label['duration'] ? "~ " + Math.floor(label['duration']/12) + " yr." : label['companyName']}
                                     </StepLabel>
                                 </Step>
                             ))}
