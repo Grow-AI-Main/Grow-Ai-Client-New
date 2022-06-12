@@ -234,7 +234,6 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         const position = educationHistory.length;
         setAccomplishedEducationNum(position);
         
-        console.log(currentEducations)
         if (educationHistory.length === currentEducations.length) {
             setIsEducationCompleted(true);
         }
