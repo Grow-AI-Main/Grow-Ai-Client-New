@@ -35,7 +35,7 @@ const OpenDialogButton = ({ setOpenPopUp, barStatus, changeLinkedinPopUpState })
         <>
             {isEnable &&
                 <OpenDialogButtonStyled>
-                    <Button onClick={handleClickOpen} className="popup-buuton">{barStatus === 1 ? "Add Education" : "Add Expeirience"}</Button>
+                    <Button onClick={handleClickOpen} className="popup-buuton">{barStatus === 1 ? "Add Education" : "Add Experience"}</Button>
                 </OpenDialogButtonStyled>
             }
             {isLinkedinEnable &&

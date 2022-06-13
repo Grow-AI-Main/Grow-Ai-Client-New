@@ -2,8 +2,8 @@ import { Grid, Typography, Button } from "@mui/material";
 import BusinessIcon from '@mui/icons-material/Business';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import React, { useEffect, useState } from "react";
-import JasonData from '../../const/MockJobOpening.json';
 import './index.css';
+import { getJobAdds, getEducationAdds } from "../../services/backendService";
 
 const openingSection = {
     borderRadius: '16px',
@@ -29,7 +29,7 @@ const JobOpening = (JobTitle, CompanyName, Description, Link) => {
         <BusinessIcon color="#43655A" />
         <Typography variant="h6">{"Job Title: " + JobTitle}</Typography>
         <Typography variant="h6">{"Company Name: " + CompanyName}</Typography>
-        <Typography variant="h6">{"Description: " + Description}</Typography>
+        {Description !=="" ? <Typography variant="h6">{"Description: " + Description}</Typography> : <></>}
         <Button className="job_education_link" href={Link}>Click me!</Button>
     </Grid>)
 
@@ -48,13 +48,25 @@ const EduOpening = (Type, Field, InstatutionName, Link) => {
 const NextStepPage = ({ barStatus, recomendedEducation, currentPosition }) => {
     const [isEnable, setIsEnable] = useState(false)
     const [openings, setOpenings] = useState([])
-    const [education, setEducation] = useState({})
+    const [education, setEducation] = useState([])
 
     useEffect(() => {
+
+        const fetchJobsAdds = async (currentPosition) =>{
+            const returnJobs = await getJobAdds(currentPosition)
+            getOpenings(returnJobs)
+        }
+        
+        const fetchEducationAdds = async (recomendedEducation) =>{
+            const returnEdu = await getEducationAdds(recomendedEducation)
+            getEducation(returnEdu)
+        }
+        
+
         if (barStatus === 4) {
             setIsEnable(true)
-            getOpenings()
-            getEducation()
+            fetchJobsAdds(currentPosition)
+            fetchEducationAdds(recomendedEducation)
         }
         else {
             setIsEnable(false)
@@ -62,19 +74,19 @@ const NextStepPage = ({ barStatus, recomendedEducation, currentPosition }) => {
 
     }, [barStatus])
 
-    const getOpenings = () => {
+    const getOpenings = (jobAdds) => {
         let joblist = []
-        JasonData.Jobs.map((job) =>
-            joblist.push(JobOpening(job.JobTitle, job.CompanyName, job.Description, job.Link))
-        )
+        jobAdds.jobs.forEach(job => {
+            joblist.push(JobOpening(job.jobTitle, job.companyName, job.description, job.link))
+        },)
         setOpenings(joblist)
     }
 
-    const getEducation = () => {
+    const getEducation = (eduAdds) => {
         let edulist = []
-        JasonData.Educations.map((edu) =>
-            edulist.push(EduOpening(edu.Type, edu.Field, edu.InstatutionName, edu.Link))
-        )
+        eduAdds.map((edu) =>{
+            edulist.push(EduOpening(edu.type, edu.field, edu.institutionName, edu.link))
+        })
         setEducation(edulist)
     }
 
