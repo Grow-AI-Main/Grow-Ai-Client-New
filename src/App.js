@@ -20,6 +20,7 @@ const App = () => {
     const [openLinkedinPopUp, setLinkedinPopUp] = useState(false);
     const [educationHistory, setEducationHistory] = useState([]);
     const [expirienceHistory, setExpirienceHistory] = useState([]);
+    const [recomendedEducation, setRecomendedEducation] = useState('');
 
     const setNextStep = () => {
         setBarStatus(barStatus + 1);

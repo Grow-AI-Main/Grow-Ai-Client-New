@@ -122,15 +122,19 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
                         }}
                     />
                     {!thirdFieldTitle &&
-                        <Autocomplete
-                        disablePortal
-                        className="text-fields"
-                        options={secondFieldValue}
-                        renderInput={(params) => <TextField {...params} label={secondFieldTitle} />}
-                        onChange={(event, newValue) => {
-                            setSelectedSecondFieldValue(newValue);
-                        }}
-                    />
+                        <TextField
+                            autoFocus
+                            className="text-fields"
+                            margin="dense"
+                            label={secondFieldTitle}
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            value={selectedSecondFieldValue}
+                            onChange={(e) => {
+                                setSelectedSecondFieldValue(e.target.value);
+                            }}
+                        />
                     }
                     {
                         thirdFieldTitle &&

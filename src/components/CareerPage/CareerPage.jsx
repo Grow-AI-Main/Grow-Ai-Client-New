@@ -23,13 +23,13 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.active}`]: {
         [`& .${stepConnectorClasses.line}`]: {
             backgroundImage:
-                "linear-gradient( 136deg, rgb(247 244 247) 0%, rgb(0 128 255) 50%, rgb(0 128 255) 100%)"
+                "linear-gradient( 136deg, #11999e 0%, #3dabad 50%, #40514e 100%)"
         }
     },
     [`&.${stepConnectorClasses.completed}`]: {
         [`& .${stepConnectorClasses.line}`]: {
             backgroundImage:
-                "linear-gradient( 136deg, rgb(247 244 247) 0%, rgb(0 128 255) 50%, rgb(0 128 255) 100%)"
+                "linear-gradient( 136deg, #11999e 0%, #3dabad 50%, #40514e 100%)"
         }
     },
     [`& .${stepConnectorClasses.line}`]: {
@@ -55,12 +55,12 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
     textAlign: 'left',
     ...(ownerState.active && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(92 120 111) 0%, #5d7d7d 50%, rgb(67 101 90) 100%)",
+            "linear-gradient( 136deg, rgb(61 168 170) 0%, #324b4b 50%, rgb(54 168 171) 100%)",
         boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)"
     }),
     ...(ownerState.completed && {
         backgroundImage:
-            "linear-gradient( 136deg, rgb(92 120 111) 0%, #5d7d7d 50%, rgb(67 101 90) 100%)"
+            "linear-gradient( 136deg, rgb(61 168 170) 0%, #324b4b 50%, rgb(54 168 171) 100%)"
     })
 }));
 
@@ -78,7 +78,7 @@ const ColorlibMainIconRoot = styled("div")(({ theme, ownerState }) => ({
     alignItems: "center",
     ...(ownerState.active && {
         backgroundImage:
-            "linear-gradient( 136deg, #e5e5e5 0%, #43655a 50%, #7e969c 100%)",
+            "linear-gradient( 136deg, #e5e5e5 0%, #3d9fa0 50%, #324b4b 100%)",
         boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)"
     }),
     ...(ownerState.completed && {
@@ -148,18 +148,9 @@ const ColorlibEducationStepIcon = (props) => {
 };
 
 
-const getUpdatedEducation = (education, firstEducationRecomended, secondEducationRecomended) => {
-    if (Object.keys(firstEducationRecomended).length !== 0 && Object.keys(secondEducationRecomended).length !== 0) {
-        education.push(firstEducationRecomended);
-        education.push(secondEducationRecomended);
-    }
-    else if (Object.keys(firstEducationRecomended).length === 0 && Object.keys(secondEducationRecomended).length !== 0) {
-        education.push(secondEducationRecomended);
-    }
-    return education;
-}
 
-const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob }) => {
+
+const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob,setRecomendedEducation }) => {
     const [isEnable, setIsEnable] = useState(false);
     const [accomplishedJobNum, setAccomplishedJobNum] = useState(0);
     const [accomplishedEducationNum, setAccomplishedEducationNum] = useState(0);
@@ -190,6 +181,25 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         }
     }, [barStatus, experienceHistory, educationHistory, targetJob])
 
+
+    const getUpdatedEducation = (education, firstEducationRecomended, secondEducationRecomended) => {
+        if (Object.keys(firstEducationRecomended).length !== 0 && Object.keys(secondEducationRecomended).length !== 0) {
+            education.push(firstEducationRecomended);
+            education.push(secondEducationRecomended);
+            
+            if(firstEducationRecomended.hasOwnProperty('type')){
+                setRecomendedEducation(firstEducationRecomended.type);
+            }
+        }
+        else if (Object.keys(firstEducationRecomended).length === 0 && Object.keys(secondEducationRecomended).length !== 0) {
+            education.push(secondEducationRecomended);
+            
+            if(secondEducationRecomended.hasOwnProperty('type')){
+                setRecomendedEducation(secondEducationRecomended.type);
+            }
+        }
+        return education;
+    }
 
     const validateData = (returnJson) => {
         const validData = returnJson.experiences.filter((experience) => experience.jobTitle !== '');
@@ -243,7 +253,12 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
 
     const setJobs = (returnJson) => {
         const RecomendedExperiences = returnJson.experiences;
-        const jobs = experienceHistory.concat(RecomendedExperiences);
+        
+        if(RecomendedExperiences.length >= 3){
+            RecomendedExperiences.pop();
+        }
+
+        const jobs = experienceHistory.concat(RecomendedExperiences);        
         const position = experienceHistory.length - 1;
         setAccomplishedJobNum(position);
         setAccomplishedJob(jobs);
@@ -266,7 +281,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                     <Step completed={isEducationCompleted} key={edu['field']}>
                         <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
                             {<>{edu['type'] + " " + edu['field']}<br />{Array.isArray(edu["institutionName"]) ? 
-                            <><ul>{edu['institutionName'].map((inst) => (<li>{inst}</li>))}</ul></>:edu['institutionName']}</>}
+                            <><ul>{edu['institutionName'].map((inst) => (<h4>{inst}</h4>))}</ul></>:edu['institutionName']}</>}
                         </StepLabel>
                     </Step>
                 )
@@ -276,7 +291,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                     <Step completed={isEducationCompleted} key={edu['type']}>
                         <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
                         {<>{edu['type']}<br />{Array.isArray(edu['institutionName'])? 
-                            <ul>{edu['institutionName'].map((inst) => (<li>{inst}</li>))}</ul>:edu['institutionName']}</>}
+                            <ul>{edu['institutionName'].map((inst) => (<h4>{inst}</h4>))}</ul>:edu['institutionName']}</>}
                         </StepLabel>
                     </Step>
                 )
@@ -328,7 +343,3 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
 };
 
 export default CareerPage;
-
-
-//  <>{index > accomplishedEducationNum ? <><br /><ul>
-//{label['InstutationName'].map((inst) => (<li>{inst}</li>))}</ul></> : <>{label['InstutationName']}</>}</></>

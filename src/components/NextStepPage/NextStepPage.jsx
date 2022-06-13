@@ -45,7 +45,7 @@ const EduOpening = (Type, Field, InstatutionName, Link) => {
     </Grid>)
 }
 
-const NextStepPage = ({ barStatus }) => {
+const NextStepPage = ({ barStatus, recomendedEducation, currentPosition }) => {
     const [isEnable, setIsEnable] = useState(false)
     const [openings, setOpenings] = useState([])
     const [education, setEducation] = useState({})
