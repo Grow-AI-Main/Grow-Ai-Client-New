@@ -150,7 +150,7 @@ const ColorlibEducationStepIcon = (props) => {
 
 
 
-const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob,setRecomendedEducation }) => {
+const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob,recomendedEducationSetter }) => {
     const [isEnable, setIsEnable] = useState(false);
     const [accomplishedJobNum, setAccomplishedJobNum] = useState(0);
     const [accomplishedEducationNum, setAccomplishedEducationNum] = useState(0);
@@ -188,14 +188,14 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob,
             education.push(secondEducationRecomended);
             
             if(firstEducationRecomended.hasOwnProperty('type')){
-                setRecomendedEducation(firstEducationRecomended.type);
+                recomendedEducationSetter(firstEducationRecomended.type);
             }
         }
         else if (Object.keys(firstEducationRecomended).length === 0 && Object.keys(secondEducationRecomended).length !== 0) {
             education.push(secondEducationRecomended);
             
             if(secondEducationRecomended.hasOwnProperty('type')){
-                setRecomendedEducation(secondEducationRecomended.type);
+                recomendedEducationSetter(secondEducationRecomended.type);
             }
         }
         return education;
