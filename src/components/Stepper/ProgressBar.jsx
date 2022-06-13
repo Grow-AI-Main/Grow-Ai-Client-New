@@ -21,13 +21,13 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.active}`]: {
         [`& .${stepConnectorClasses.line}`]: {
             backgroundImage:
-                "linear-gradient( 136deg, #7e969c 0%, #5d7d7d 50%, #43655a 100%)"
+                "linear-gradient( 136deg, #40514e 0%, #11999e 50%, #40514e 100%)"
         }
     },
     [`&.${stepConnectorClasses.completed}`]: {
         [`& .${stepConnectorClasses.line}`]: {
             backgroundImage:
-                "linear-gradient( 136deg, #7e969c 0%, #5d7d7d 50%, #43655a 100%)"
+                "linear-gradient( 136deg, #40514e 0%, #11999e 50%, #40514e 100%)"
         }
     },
     [`& .${stepConnectorClasses.line}`]: {
@@ -52,12 +52,12 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
     alignItems: "center",
     ...(ownerState.active && {
         backgroundImage:
-            "linear-gradient( 136deg, #e5e5e5 0%, #43655a 50%, #7e969c 100%)",
+            "linear-gradient( 136deg, #11999e 0%, #3dabad 50%, #40514e 100%)",
         boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)"
     }),
     ...(ownerState.completed && {
         backgroundImage:
-            "linear-gradient( 136deg, #e5e5e5 0%, #43655a 50%, #7e969c 100%)"
+            "linear-gradient( 136deg, #11999e 0%, #3dabad 50%, #40514e 100%)"
     })
 }));
 

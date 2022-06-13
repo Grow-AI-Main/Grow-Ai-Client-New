@@ -15,7 +15,7 @@ width: 45%;
 height: 6%;
 margin-left: 27%;
 margin-top: 3%;
-background: #5d7d7d;
+background: #11999e;
 border-radius: 6px 6px 0px 0px;
 font-style: normal;
 font-size: 25px;
