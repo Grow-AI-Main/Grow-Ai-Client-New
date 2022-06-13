@@ -5,6 +5,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { getDegreeTypes, getDegreeFields, getDegreeInstitutions, getJobTitles } from "../../services/backendService";
 import { jsonPropertiesCastting } from "../../const/jsonPropertiesCastting";
+import { companyNames } from "../../const/CompanyNames";
 import './index.css';
 
 const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, addEducation }) => {
@@ -50,14 +51,19 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             setFirstFieldValue(data);
         }
 
+        const companyName = () => {
+            const data = companyNames
+            setSecondFieldValue(data)
+        }
+
 
         if (barStatus === 1) {
             setFirstFieldTitle('Degree Field');
             setSecondFieldTitle('Degree Type');
-            setThirdFieldTitle('Instutation Name');
+            setThirdFieldTitle('Institution Name');
             setFourFieldTitle('Start Year');
             setFiveFieldTitle('Graduation Year');
-            setTitle('Education Information');
+            setTitle('Insert Education Item');
             setAcceptText("I've inserted my education");
             degreeFields();
             degreeTypes();
@@ -69,10 +75,11 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
             setThirdFieldTitle('');
             setFourFieldTitle('Start Year & Month');
             setFiveFieldTitle('End Year & Month');
-            setTitle('Expirience Information');
-            setAcceptText("I've inserted my expirience");
+            setTitle('Insert Job Item');
+            setAcceptText("I've inserted my job");
             setSelectedSecondFieldValue('')
             jobTitle();
+            companyName();
         }
     }, [barStatus])
 
@@ -115,19 +122,15 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
                         }}
                     />
                     {!thirdFieldTitle &&
-                        <TextField
-                            autoFocus
-                            className="text-fields"
-                            margin="dense"
-                            label={secondFieldTitle}
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            value={selectedSecondFieldValue}
-                            onChange={(e) => {
-                                setSelectedSecondFieldValue(e.target.value);
-                            }}
-                        />
+                        <Autocomplete
+                        disablePortal
+                        className="text-fields"
+                        options={secondFieldValue}
+                        renderInput={(params) => <TextField {...params} label={secondFieldTitle} />}
+                        onChange={(event, newValue) => {
+                            setSelectedSecondFieldValue(newValue);
+                        }}
+                    />
                     }
                     {
                         thirdFieldTitle &&
@@ -148,7 +151,6 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
                             disablePortal
                             className="text-fields"
                             options={thirdFieldValue}
-                            defaultValue={thirdFieldValue[0]}
                             renderInput={(params) => <TextField {...params} label={thirdFieldTitle} />}
                             onChange={(event, newValue) => {
                                 setSelectedThirdFieldValue(newValue);

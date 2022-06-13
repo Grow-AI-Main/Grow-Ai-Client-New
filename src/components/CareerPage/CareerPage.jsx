@@ -210,13 +210,13 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         let req = {}
         req.experiences = []
 
-        job.map((job) =>
+        job.forEach((job) =>
             req.experiences.push({ 'jobTitle': job['jobTitle'], 'duration': calculateDuration(job['Start Year & Month'], job['End Year & Month']) })
         )
 
-        edu.map((edu, index) => {
-            if (index === 0) { req.firstDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['instutationName'] } }
-            if (index === 1) { req.secondDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['instutationName'] } }
+        edu.forEach((edu, index) => {
+            if (index === 0) { req.firstDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['institutionName'] } }
+            if (index === 1) { req.secondDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['institutionName'] } }
         })
 
         req.destination_job = targetJob
@@ -231,11 +231,12 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         currentEducations = getUpdatedEducation(currentEducations, firstDegree, secondDegree);
 
         setEducations(currentEducations);
-        const position = educationHistory.length;
+        const position = educationHistory.length -1 ;
         setAccomplishedEducationNum(position);
- 
 
-        if (educationHistory.length === currentEducations.length) {
+        const currentPosition = position +1;
+        
+        if (currentPosition === currentEducations.length) {
             setIsEducationCompleted(true);
         }
     }
@@ -254,6 +255,36 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         }
     }
 
+    const presentEducation = () =>
+    {
+        let education = []
+
+        educations.map((label) => {
+            const edu = label
+            if(edu.hasOwnProperty('field')){
+                education.push(
+                    <Step completed={isEducationCompleted} key={edu['field']}>
+                        <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
+                            {<>{edu['type'] + " " + edu['field']}<br />{Array.isArray(edu["institutionName"]) ? 
+                            <><ul>{edu['institutionName'].map((inst) => (<li>{inst}</li>))}</ul></>:edu['institutionName']}</>}
+                        </StepLabel>
+                    </Step>
+                )
+            }
+            else{
+                education.push(
+                    <Step completed={isEducationCompleted} key={edu['type']}>
+                        <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
+                        {<>{edu['type']}<br />{Array.isArray(edu['institutionName'])? 
+                            <ul>{edu['institutionName'].map((inst) => (<li>{inst}</li>))}</ul>:edu['institutionName']}</>}
+                        </StepLabel>
+                    </Step>
+                )
+            }
+        })
+        return education
+    }
+
     return (
         <>
             {isEnable &&
@@ -270,7 +301,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                             {accomplishedJob.map((label, index) => (
                                 <Step key={label['jobTitle'] + index}>
                                     <StepLabel StepIconComponent={ColorlibJobStepIcon}>
-                                        {label['jobTitle']}<br />{label['duration'] ? "~ " + label['duration'] + " mo." : label['companyName']}
+                                        {label['jobTitle']}<br />{label['duration'] ? "~ " + (label['duration']/12).toFixed(1) + " yr." : label['companyName']}
                                     </StepLabel>
                                 </Step>
                             ))}
@@ -288,13 +319,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                     </div>
                     <div className="recomended-div">
                         <Stepper alternativeLabel activeStep={accomplishedEducationNum} connector={<ColorlibConnector />}>
-                            {educations.map((label, index) => (
-                                <Step completed={isEducationCompleted} key={label['field']}>
-                                    <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
-                                        {<>{label['type'] + " " + label['field']}<br />{label['instutationName']}</>}
-                                    </StepLabel>
-                                </Step>
-                            ))}
+                            {presentEducation()}
                         </Stepper>
                     </div>
                 </>

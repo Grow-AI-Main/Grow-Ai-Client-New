@@ -1,7 +1,7 @@
 const titles = {
-    0: 'Choose Your Dream Job',
+    0: "What's your dream job?",
     1: 'Tell us about your education',
-    2: 'Tell us about job history',
+    2: 'Tell us about your job history',
     3: 'Your Tailor-Made Recommended Career Path',
     4: 'Your next step'
 }

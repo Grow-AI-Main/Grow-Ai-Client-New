@@ -84,7 +84,7 @@ const ColorlibStepIcon = (props) => {
 
 const steps = [
     "What's your dream job ?",
-    "What have you study so far ?",
+    "What have you studied so far ?",
     "What have you done so far ?",
     "What's your tailor-made career path ?",
     "What's your next step?"

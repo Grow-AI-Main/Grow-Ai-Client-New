@@ -72,7 +72,7 @@ const EducationJobList = ({ educationHistory, expirienceHistory, barStatus, setE
                     {title}
                 </TitleStyled><EducationJobListStyled>
                         {currentData.map((item, index) => (
-                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'Instutation Name' : 'Job Title'} firstTitleValue={barStatus === 1 ? item[jsonPropertiesCastting['Instutation Name']] : item[jsonPropertiesCastting['Job Title']]} secondTitle={barStatus === 1 ? 'Degree Field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item[jsonPropertiesCastting['Degree Field']] : item[jsonPropertiesCastting['Company Name']]} removeEducationOrJob={removeEducationOrJob} />
+                            <EducationJobItem index={index} firstTitle={barStatus === 1 ? 'Institution Name' : 'Job Title'} firstTitleValue={barStatus === 1 ? item[jsonPropertiesCastting['Institution Name']] : item[jsonPropertiesCastting['Job Title']]} secondTitle={barStatus === 1 ? 'Degree Field' : 'Company Name'} secondTitleValue={barStatus === 1 ? item[jsonPropertiesCastting['Degree Field']] : item[jsonPropertiesCastting['Company Name']]} removeEducationOrJob={removeEducationOrJob} />
                         ))}
                     </EducationJobListStyled></>
             }</>
