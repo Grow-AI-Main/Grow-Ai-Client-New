@@ -151,7 +151,6 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
                             disablePortal
                             className="text-fields"
                             options={thirdFieldValue}
-                            defaultValue={thirdFieldValue[0]}
                             renderInput={(params) => <TextField {...params} label={thirdFieldTitle} />}
                             onChange={(event, newValue) => {
                                 setSelectedThirdFieldValue(newValue);
