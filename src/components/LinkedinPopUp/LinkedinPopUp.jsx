@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import SnackBarNotify from "./SnackBarNotify";
 import { getProfileData } from "../../services/backendService";
@@ -15,12 +15,6 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
     const [notifyStatus, setNotifyStatus] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
-    useEffect(() => {
-        if (barStatus === 1) {
-            setLinkedinPopUp(true);
-        }
-    }, [barStatus])
-
     const handleClose = () => {
         setLinkedinPopUp(false);
     }
@@ -30,7 +24,7 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
         if (data.hasOwnProperty('firstDegree')) {
             addEducation({
                 field: data.firstDegree.field,
-                instutationName: data.firstDegree.institutionName,
+                institutionName: data.firstDegree.institutionName,
                 type: data.firstDegree.type
             });
         }
@@ -38,7 +32,7 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
         if (data.hasOwnProperty('secondDegree')) {
             addEducation({
                 field: data.secondDegree.field,
-                instutationName: data.secondDegree.institutionName,
+                institutionName: data.secondDegree.institutionName,
                 type: data.secondDegree.type
             });
         }
