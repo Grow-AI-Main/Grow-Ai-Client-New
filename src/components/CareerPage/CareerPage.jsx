@@ -231,10 +231,12 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         currentEducations = getUpdatedEducation(currentEducations, firstDegree, secondDegree);
 
         setEducations(currentEducations);
-        const position = educationHistory.length;
+        const position = educationHistory.length -1 ;
         setAccomplishedEducationNum(position);
+
+        const currentPosition = position +1;
         
-        if (educationHistory.length === currentEducations.length) {
+        if (currentPosition === currentEducations.length) {
             setIsEducationCompleted(true);
         }
     }
@@ -253,6 +255,36 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         }
     }
 
+    const presentEducation = () =>
+    {
+        let education = []
+
+        educations.map((label) => {
+            const edu = label
+            if(edu.hasOwnProperty('field')){
+                education.push(
+                    <Step completed={isEducationCompleted} key={edu['field']}>
+                        <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
+                            {<>{edu['type'] + " " + edu['field']}<br />{Array.isArray(edu["institutionName"]) ? 
+                            <><ul>{edu['institutionName'].map((inst) => (<li>{inst}</li>))}</ul></>:edu['institutionName']}</>}
+                        </StepLabel>
+                    </Step>
+                )
+            }
+            else{
+                education.push(
+                    <Step completed={isEducationCompleted} key={edu['type']}>
+                        <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
+                        {<>{edu['type']}<br />{Array.isArray(edu['institutionName'])? 
+                            <ul>{edu['institutionName'].map((inst) => (<li>{inst}</li>))}</ul>:edu['institutionName']}</>}
+                        </StepLabel>
+                    </Step>
+                )
+            }
+        })
+        return education
+    }
+
     return (
         <>
             {isEnable &&
@@ -269,7 +301,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                             {accomplishedJob.map((label, index) => (
                                 <Step key={label['jobTitle'] + index}>
                                     <StepLabel StepIconComponent={ColorlibJobStepIcon}>
-                                        {label['jobTitle']}<br />{label['duration'] ? "~ " + Math.floor(label['duration']/12) + " yr." : label['companyName']}
+                                        {label['jobTitle']}<br />{label['duration'] ? "~ " + (label['duration']/12).toFixed(1) + " yr." : label['companyName']}
                                     </StepLabel>
                                 </Step>
                             ))}
@@ -287,13 +319,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
                     </div>
                     <div className="recomended-div">
                         <Stepper alternativeLabel activeStep={accomplishedEducationNum} connector={<ColorlibConnector />}>
-                            {educations.map((label, index) => (
-                                <Step completed={isEducationCompleted} key={label['field']}>
-                                    <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
-                                        {<>{label['type'] + " " + label['field']}<br />{label['institutionName']}</>}
-                                    </StepLabel>
-                                </Step>
-                            ))}
+                            {presentEducation()}
                         </Stepper>
                     </div>
                 </>

@@ -30,7 +30,7 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
         if (data.hasOwnProperty('firstDegree')) {
             addEducation({
                 field: data.firstDegree.field,
-                instutationName: data.firstDegree.institutionName,
+                institutionName: data.firstDegree.institutionName,
                 type: data.firstDegree.type
             });
         }
@@ -38,7 +38,7 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
         if (data.hasOwnProperty('secondDegree')) {
             addEducation({
                 field: data.secondDegree.field,
-                instutationName: data.secondDegree.institutionName,
+                institutionName: data.secondDegree.institutionName,
                 type: data.secondDegree.type
             });
         }
