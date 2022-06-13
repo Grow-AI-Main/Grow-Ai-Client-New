@@ -10,6 +10,7 @@ import './index.css';
 const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, addEducation }) => {
     const [title, setTitle] = useState('');
 
+
     const [firstFieldValue, setFirstFieldValue] = useState([]);
     const [secondFieldValue, setSecondFieldValue] = useState([]);
     const [thirdFieldValue, setThirdFieldValue] = useState([]);
@@ -107,7 +108,8 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
                         disablePortal
                         className="text-fields"
                         options={firstFieldValue}
-                        renderInput={(params) => <TextField {...params} label={firstFieldTitle} />}
+                        renderInput={(params) => <TextField {...params} label={firstFieldTitle}
+                        />}
                         onChange={(event, newValue) => {
                             setSelectedFirstFieldValue(newValue);
                         }}
@@ -130,6 +132,7 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
                     {
                         thirdFieldTitle &&
                         <Autocomplete
+                            required
                             disablePortal
                             className="text-fields"
                             options={secondFieldValue}
@@ -141,9 +144,11 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
                     }
                     {thirdFieldTitle &&
                         <Autocomplete
+                            required
                             disablePortal
                             className="text-fields"
                             options={thirdFieldValue}
+                            defaultValue={thirdFieldValue[0]}
                             renderInput={(params) => <TextField {...params} label={thirdFieldTitle} />}
                             onChange={(event, newValue) => {
                                 setSelectedThirdFieldValue(newValue);
@@ -152,26 +157,26 @@ const JobEducationPopUp = ({ barStatus, setOpenPopUp, openPopUp, addExpirience, 
                     }
                 </DialogContent>
                 <DialogContent>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                views={barStatus === 2 ? ['year', 'month'] : ['year']}
-                                label={fourFieldTitle}
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                            views={barStatus === 2 ? ['year', 'month'] : ['year']}
+                            label={fourFieldTitle}
                             value={startYear}
                             onChange={(newValue) => {
                                 setStartYear(newValue);
                             }}
-                            renderInput={(params) => <TextField {...params} sx={{ mr: 3 }}  />}
-                            />
-                            <DatePicker
-                                views={barStatus === 2 ? ['year', 'month'] : ['year']}
-                                label={fiveFieldTitle}
-                                value={endYear}
-                                onChange={(newValue) => {
-                                    setEndYear(newValue);
-                                }}
-                                renderInput={(params) => <TextField {...params} helperText={null} />}
-                            />
-                        </LocalizationProvider>
+                            renderInput={(params) => <TextField {...params} sx={{ mr: 3 }} />}
+                        />
+                        <DatePicker
+                            views={barStatus === 2 ? ['year', 'month'] : ['year']}
+                            label={fiveFieldTitle}
+                            value={endYear}
+                            onChange={(newValue) => {
+                                setEndYear(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} helperText={null} />}
+                        />
+                    </LocalizationProvider>
                 </DialogContent>
                 <DialogActions>
                     <Button className="accept-buuton" onClick={addNewItem}>{acceptText}</Button>

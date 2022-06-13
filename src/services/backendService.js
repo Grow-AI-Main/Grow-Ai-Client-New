@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create(
     {
-        baseURL: "http://localhost:8080",
+        baseURL: "http://127.0.0.1:8080",
         withCredentials: false,
         headers: {
             'Access-Control-Allow-Origin': '*',
@@ -26,7 +26,7 @@ const getJobTitles = async () => {
 const getDestinationJobs = async () => {
     try {
         const resaponse = await instance.get(
-            'resources/destination_jobs'
+            '/resources/destination_jobs'
         );
         return resaponse.data.destination_jobs;
     }
@@ -95,10 +95,14 @@ const analyze = async (req) => {
             '/analyze', req
         );
 
-        return response.data;
+        const data = response.data;
+
+        return data;
+
     }
     catch (err) {
         console.log(`Inernal Server Error` + err);
+
     }
 }
 

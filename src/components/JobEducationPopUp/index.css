@@ -1,6 +1,6 @@
 .accept-buuton {
     color: white;
-    background: #43655A;
+    background: #11999E;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     width: 230px;
@@ -20,7 +20,7 @@
 
 .popup-buuton {
     color: white;
-    background: #7e969c;
+    background: #11999E;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     width: 185px;
@@ -31,7 +31,7 @@
 
 .next-buuton {
     color: white;
-    background: #43655A;
+    background: #40514E;
     box-shadow: 0px 2px 8px rgb(0 0 0 / 15%);
     border-radius: 8px;
     width: 185px;
@@ -42,7 +42,7 @@
 
 .prev-buuton {
     color: white;
-    background: #5d7d7d;
+    background: #40514E;
     box-shadow: 0px 2px 8px rgb(0 0 0 / 15%);
     border-radius: 8px;
     width: 185px;

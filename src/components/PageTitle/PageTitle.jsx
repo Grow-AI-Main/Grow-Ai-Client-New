@@ -12,7 +12,7 @@ font-weight: 700;
 font-size: 60px;
 line-height: 54px;
 text-align: center;
-color: #43655A;
+color: #324b4b;
 text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
 `;
 

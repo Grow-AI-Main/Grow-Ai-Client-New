@@ -13,6 +13,7 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
     const betaUsers = ['gal-tandeitnik', 'tom-pony'];
     const [currentUser, setCurrentUser] = useState('');
     const [notifyStatus, setNotifyStatus] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
         if (barStatus === 1) {
@@ -57,7 +58,15 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
     }
 
     const getUserData = async () => {
-        if (betaUsers.includes(currentUser)) {
+        
+        if(currentUser.length === 0){
+            setErrorMessage(
+                "The input canot be Empty"
+              );
+              return;
+        }
+
+        else if (betaUsers.includes(currentUser)) {
             let data = await getProfileData(currentUser);
             parseData(data);
             handleClose();
@@ -75,6 +84,8 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
                 <DialogContent>
                     <DialogTitle>{subTitle}</DialogTitle>
                     <TextField
+                        error={currentUser.length === 0}
+                        helperText={errorMessage}
                         autoFocus
                         className="text-fields"
                         margin="dense"
