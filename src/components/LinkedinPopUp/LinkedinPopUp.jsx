@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import SnackBarNotify from "./SnackBarNotify";
 import { getProfileData } from "../../services/backendService";
@@ -14,12 +14,6 @@ const LinkedinPopUp = ({ barStatus, setLinkedinPopUp, openLinkedinPopUp, setExpi
     const [currentUser, setCurrentUser] = useState('');
     const [notifyStatus, setNotifyStatus] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-
-    useEffect(() => {
-        if (barStatus === 1) {
-            setLinkedinPopUp(true);
-        }
-    }, [barStatus])
 
     const handleClose = () => {
         setLinkedinPopUp(false);

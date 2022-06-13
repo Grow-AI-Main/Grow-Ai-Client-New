@@ -18,8 +18,9 @@ const openingItem = {
     borderRadius: '16px',
     margin: 'auto',
     justifyContent: 'center',
-    backgroundColor: "#E5E5E5",
-    width: '273px',
+    backgroundColor: "#2ea5a859",
+    width: '270px',
+    paddingBottom: '32px',
     height: '300px',
 }
 
@@ -63,7 +64,7 @@ const NextStepPage = ({ barStatus }) => {
 
     const getOpenings = () => {
         let joblist = []
-        JasonData.Jobs.map((job) => 
+        JasonData.Jobs.map((job) =>
             joblist.push(JobOpening(job.JobTitle, job.CompanyName, job.Description, job.Link))
         )
         setOpenings(joblist)
@@ -71,8 +72,8 @@ const NextStepPage = ({ barStatus }) => {
 
     const getEducation = () => {
         let edulist = []
-        JasonData.Educations.map((edu) => 
-        edulist.push(EduOpening(edu.Type, edu.Field, edu.InstatutionName, edu.Link))
+        JasonData.Educations.map((edu) =>
+            edulist.push(EduOpening(edu.Type, edu.Field, edu.InstatutionName, edu.Link))
         )
         setEducation(edulist)
     }
@@ -85,7 +86,7 @@ const NextStepPage = ({ barStatus }) => {
                 <div style={{ margin: 'auto' }}>
                     <Grid container spacing={4} sx={openingSection}>
                         <Grid item>
-                            <Typography variant="h5" color="#43655A">Job openings</Typography>
+                            <Typography variant="h5" sx={{ color: '#324b4b', marginRight: '55px' }}>Job openings</Typography>
                         </Grid>
                         <Grid container spacing={4} justifyContent="center">
                             {openings}
@@ -97,7 +98,7 @@ const NextStepPage = ({ barStatus }) => {
                 <div style={{ margin: 'auto' }}>
                     <Grid container spacing={4} sx={openingSection}>
                         <Grid item>
-                            <Typography variant="h5" color="#43655A">Education openings</Typography>
+                            <Typography variant="h5" sx={{ color: '#324b4b', marginRight: '55px' }}>Education openings</Typography>
                         </Grid>
                         <Grid container spacing={4} justifyContent="center">
                             {education}

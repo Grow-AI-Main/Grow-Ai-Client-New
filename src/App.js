@@ -25,6 +25,10 @@ const App = () => {
         setBarStatus(barStatus + 1);
     };
 
+    const changeLinkedinPopUpState = () => {
+        setLinkedinPopUp(!openLinkedinPopUp);
+    }
+
     const setPrevStep = () => {
         setBarStatus(barStatus - 1);
     };
@@ -45,7 +49,7 @@ const App = () => {
                 <PositionList barStatus={barStatus} setCurrentPosition={setCurrentPosition} setNextStep={setNextStep} />
                 <EducationJobList educationHistory={educationHistory} expirienceHistory={expirienceHistory} barStatus={barStatus} setEducationHistory ={setEducationHistory} setExpirienceHistory={setExpirienceHistory}/>
                 <NextStepPage barStatus={barStatus} />
-                <OpenDialogButton buttonText={"Add Education"} setOpenPopUp={setOpenPopUp} barStatus={barStatus} />
+                <OpenDialogButton buttonText={"Add Education"} setOpenPopUp={setOpenPopUp} barStatus={barStatus} changeLinkedinPopUpState={changeLinkedinPopUpState} />
                 <CareerPage barStatus={barStatus} experienceHistory={expirienceHistory} educationHistory={educationHistory} targetJob={currentPosition} />
                 <NextStageButton barStatus={barStatus} setNextStep={setNextStep} setPrevStep={setPrevStep} />
                 <JobEducationPopUp barStatus={barStatus} setOpenPopUp={setOpenPopUp} openPopUp={openPopUp} addExpirience={addExpirience} addEducation={addEducation} />

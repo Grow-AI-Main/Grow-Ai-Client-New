@@ -25,7 +25,7 @@ margin-left: 3%;
 color:Gray;
 `;
 
-const DeleteIconStyled = styled(DeleteIcon)(({ }) => ({
+const DeleteIconStyled = styled(DeleteIcon)(() => ({
     marginLeft: '97%',
     marginTop: '-24px',
     color: '#005a34'

@@ -210,11 +210,11 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob 
         let req = {}
         req.experiences = []
 
-        job.map((job) =>
+        job.forEach((job) =>
             req.experiences.push({ 'jobTitle': job['jobTitle'], 'duration': calculateDuration(job['Start Year & Month'], job['End Year & Month']) })
         )
 
-        edu.map((edu, index) => {
+        edu.forEach((edu, index) => {
             if (index === 0) { req.firstDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['institutionName'] } }
             if (index === 1) { req.secondDegree = { 'type': edu['type'], 'field': edu['field'], 'institutionName': edu['institutionName'] } }
         })
