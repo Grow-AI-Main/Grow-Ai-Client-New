@@ -278,7 +278,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob,
             const edu = label
             if(edu.hasOwnProperty('field')){
                 education.push(
-                    <Step completed={isEducationCompleted} key={edu['field']}>
+                    <Step key={edu['field']}>
                         <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
                             {<>{edu['type'] + " " + edu['field']}<br />{Array.isArray(edu["institutionName"]) ? 
                             <><ul>{edu['institutionName'].map((inst) => (<h4>{inst}</h4>))}</ul></>:edu['institutionName']}</>}
@@ -288,7 +288,7 @@ const CareerPage = ({ barStatus, experienceHistory, educationHistory, targetJob,
             }
             else{
                 education.push(
-                    <Step completed={isEducationCompleted} key={edu['type']}>
+                    <Step key={edu['type']}>
                         <StepLabel StepIconComponent={ColorlibEducationStepIcon}>
                         {<>{edu['type']}<br />{Array.isArray(edu['institutionName'])? 
                             <ul>{edu['institutionName'].map((inst) => (<h4>{inst}</h4>))}</ul>:edu['institutionName']}</>}

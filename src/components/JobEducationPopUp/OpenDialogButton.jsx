@@ -27,7 +27,7 @@ const OpenDialogButton = ({ setOpenPopUp, barStatus }) => {
         <>
             {isEnable &&
                 <OpenDialogButtonStyled>
-                    <Button onClick={handleClickOpen} className="popup-buuton">{barStatus === 1 ? "Add Education Item" : "Add Experience Item"}</Button>
+                    <Button onClick={handleClickOpen} className="popup-buuton">{barStatus === 1 ? "Add Education Item" : "Add Job Item"}</Button>
                 </OpenDialogButtonStyled>
             }
         </>)

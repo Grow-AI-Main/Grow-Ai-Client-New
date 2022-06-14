@@ -106,4 +106,30 @@ const analyze = async (req) => {
     }
 }
 
-export { getDegreeFields, getDegreeInstitutions, getDegreeTypes, getDestinationJobs, getJobTitles, analyze, getProfileData }
+const getJobAdds = async(destJob) => {
+    try {
+        const response = await instance.get(
+            `/resources/adds/jobs/${destJob}`
+        );
+        const data = response.data;
+        return data;
+    }
+    catch (err) {
+        console.log(`Internal Server Error` + err);
+    }
+}
+
+const getEducationAdds = async(edu) => {
+    try {
+        const response = await instance.get(
+            `/resources/adds/educations/${edu}`
+        );
+        const data = response.data;
+        return data;
+    }
+    catch (err) {
+        console.log(`Internal Server Error` + err);
+    }
+}
+
+export { getDegreeFields, getDegreeInstitutions, getDegreeTypes, getDestinationJobs, getJobTitles, analyze, getProfileData, getJobAdds, getEducationAdds }
